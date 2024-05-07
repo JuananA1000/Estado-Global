@@ -10,21 +10,33 @@ function App() {
   const tareas = useSelector((state) => state.tareas);
 
   const handleAddTask = () => {
-    accionarDispatch(addTarea(nuevaTarea));
-    setNuevaTarea('');
+    if (nuevaTarea !== '') {
+      accionarDispatch(addTarea(nuevaTarea));
+      setNuevaTarea('');
+    }
   };
 
   return (
-    <div>
+    <div className='task-list'>
       <h1>Lista de Tareas</h1>
-      <div className='card'>
-        <ul>
+      <div className='task-card'>
+        <ul className='task-items'>
           {tareas.map((task, index) => (
-            <h4 key={index}>{task}</h4>
+            <li key={index} className='task-item'>
+              {task}
+            </li>
           ))}
         </ul>
-        <input type='text' value={nuevaTarea} onChange={(e) => setNuevaTarea(e.target.value)} />
-        <button onClick={handleAddTask}>Agregar Tarea</button>
+        <input
+          type='text'
+          value={nuevaTarea}
+          onChange={(e) => setNuevaTarea(e.target.value)}
+          className='task-input'
+          placeholder='Agregar nueva tarea'
+        />
+        <button onClick={handleAddTask} className='add-button'>
+          Agregar Tarea
+        </button>
       </div>
     </div>
   );
