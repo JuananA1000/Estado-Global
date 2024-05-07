@@ -12,6 +12,10 @@ const tareasSlice = createSlice({
     eliminarTarea: (state, action) => {
       return state.filter((tarea) => tarea !== action.payload);
     },
+
+    completarTarea: () => {
+      // Esta funcion pintará de verde cada tarea al pulsar en el chack
+    },
   },
 });
 
