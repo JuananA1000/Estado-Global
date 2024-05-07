@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTarea } from './redux/tareasSlice';
+import { addTarea, eliminarTarea } from './redux/tareasSlice';
+
+import garbage from './img/garbage.svg';
 
 import './App.css';
 
@@ -21,9 +23,10 @@ function App() {
       <h1>Lista de Tareas</h1>
       <div className='task-card'>
         <ul className='task-items'>
-          {tareas.map((task, index) => (
+          {tareas.map((tarea, index) => (
             <li key={index} className='task-item'>
-              {task}
+              {tarea}
+              <img src={garbage} width={20} id='eliminar' onClick={() => accionarDispatch(eliminarTarea(tarea))} />
             </li>
           ))}
         </ul>

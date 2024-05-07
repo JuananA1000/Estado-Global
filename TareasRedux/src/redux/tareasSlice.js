@@ -8,8 +8,12 @@ const tareasSlice = createSlice({
     addTarea: (state, action) => {
       state.push(action.payload);
     },
+
+    eliminarTarea: (state, action) => {
+      return state.filter((tarea) => tarea !== action.payload);
+    },
   },
 });
 
-export const { addTarea } = tareasSlice.actions;
+export const { addTarea, eliminarTarea } = tareasSlice.actions;
 export default tareasSlice.reducer;

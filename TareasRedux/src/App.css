@@ -4,8 +4,6 @@
   text-align: center;
 }
 
-
- 
 .task-list {
   font-family: Arial, sans-serif;
   margin: 0 auto;
@@ -25,10 +23,21 @@
 }
 
 .task-item {
+  display: flex;
   margin-bottom: 10px;
   padding: 10px;
   background-color: #ffffff;
   border-radius: 5px;
+  justify-content: space-around;
+}
+
+#eliminar {
+  background-color: #e90000;
+  padding: 3px;
+  border-radius: 5px;
+}
+#eliminar:hover {
+  cursor: pointer;
 }
 
 .task-input {
@@ -49,8 +58,6 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
 .add-button:hover {
   background-color: #0056b3;
 }
-
