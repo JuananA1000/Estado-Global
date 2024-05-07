@@ -1,6 +1,4 @@
 import './App.css';
-import Boton from './components/Boton/Boton';
-import Input from './components/Input/Input';
 
 function App() {
   return (
@@ -8,7 +6,7 @@ function App() {
       <h1>Lista de Tareas</h1>
       <div className='card'>
         <input />
-        <Boton />
+        <button >Añadir tarea</button>
       </div>
     </div>
   );
