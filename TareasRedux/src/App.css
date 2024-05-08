@@ -30,12 +30,15 @@
   border-radius: 5px;
   justify-content: space-around;
 }
-
-#eliminar {
-  background-color: #e90000;
-  padding: 3px;
+.task-item-completed {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #07ca00;
   border-radius: 5px;
+  justify-content: space-around;
 }
+
 #eliminar:hover {
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTarea, eliminarTarea } from './redux/tareasSlice';
+import { addTarea, eliminarTarea, completarTarea } from './redux/tareasSlice';
 
 import check from './img/check.svg';
 import garbage from './img/garbage.svg';
@@ -19,16 +19,28 @@ function App() {
     }
   };
 
+  const handleCompleteTask = (tarea) => {
+    // code
+    dispatch(completarTarea(tarea.texto));
+  };
+
+  /*
+    IDEA: para marcar alguna tarea como completada, pintaremos la tarea de verde. Para ello, debemos jugar con las
+    clases 'task-item' y 'task-item-completed'.
+    Realizaremos este cambio de nombre con redux. Se trata de un simple cambio de className en un componente, no debería
+    ser excesivamente complicado. 
+  */
+ 
   return (
     <div className='task-list'>
       <h1>Lista de Tareas</h1>
       <div className='task-card'>
         <ul className='task-items'>
           {tareas.map((tarea, index) => (
-            <li key={index} className='task-item'>
+            <li key={index} className={tarea.marcada ? 'task-item-completed' : 'task-item'}>
               {tarea}
               <div>
-                <img src={check} width={20} />
+                <img src={check} onClick={() => handleCompleteTask} width={20} />
                 <img
                   style={{ marginLeft: '10px' }}
                   src={garbage}
