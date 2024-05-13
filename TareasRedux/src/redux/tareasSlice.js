@@ -15,7 +15,7 @@ const tareasSlice = createSlice({
 
     completarTarea: (state, action) => {
       // Esta funcion pintará de verde cada tarea al pulsar en el chack
-      state.tareas = state.tareas.map(tarea => {
+      state.tareas = state.tareas.map((tarea) => {
         if (tarea.texto === action.payload) {
           return { ...tarea, marcada: !tarea.marcada };
         } else {
