@@ -14,14 +14,11 @@ const tareasSlice = createSlice({
     },
 
     completarTarea: (state, action) => {
-      // Esta funcion pintará de verde cada tarea al pulsar en el chack
-      state.tareas = state.tareas.map((tarea) => {
-        if (tarea.texto === action.payload) {
-          return { ...tarea, marcada: !tarea.marcada };
-        } else {
-          return tarea;
-        }
-      });
+      /*
+        IDEA: Esta función creará un div (array) de tareas completadas y las añadirá al clickarlas, a la vez las
+        eliminará de la lista principal 
+      */
+      console.log('completar ');
     },
   },
 });

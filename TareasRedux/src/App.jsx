@@ -35,7 +35,7 @@ function App() {
             <li key={index} className={'task-item'}>
               {tarea}
               <div>
-                <img src={check} onClick={() => console.log(`completar ${tarea}`)} width={20} />
+                <img src={check} onClick={() => accionarDispatch(completarTarea(tarea))} width={20} />
                 <img
                   style={{ marginLeft: '10px' }}
                   src={garbage}
