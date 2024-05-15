@@ -6,22 +6,20 @@ const tareasSlice = createSlice({
 
   reducers: {
     addTarea: (state, action) => {
-      const newTodo = {
+      const nuevaTarea = {
         id: Date.now(),
         texto: action.payload,
         completada: false,
       };
-      state.push(newTodo);
+      state.push(nuevaTarea);
     },
 
     eliminarTarea: (state, action) => {
-      const todoId = action.payload;
-      return state.filter((tarea) => tarea.id !== todoId);
+      return state.filter((tarea) => tarea.id !== action.payload);
     },
 
     completarTarea: (state, action) => {
-      const todoId = action.payload;
-      const todoIndex = state.findIndex((tarea) => tarea.id === todoId);
+      const todoIndex = state.findIndex((tarea) => tarea.id === action.payload);
       if (todoIndex !== -1) {
         state[todoIndex].completada = !state[todoIndex].completada;
       }

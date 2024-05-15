@@ -17,14 +17,9 @@ function App() {
       accionarDispatch(addTarea(nuevaTarea));
       setNuevaTarea('');
     }
-  };
 
-  /*
-    IDEA: para marcar alguna tarea como completada, pintaremos la tarea de verde. Para ello, debemos jugar con las
-    clases 'task-item' y 'task-item-completed'.
-    Realizaremos este cambio de nombre con redux. Se trata de un simple cambio de className en un componente, no debería
-    ser excesivamente complicado. 
-  */
+    alert('Introduce tarea')
+  };
 
   return (
     <div className='task-list'>
