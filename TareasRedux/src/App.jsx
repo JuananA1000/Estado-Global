@@ -16,9 +16,9 @@ function App() {
     if (nuevaTarea !== '') {
       accionarDispatch(addTarea(nuevaTarea));
       setNuevaTarea('');
+    } else {
+      alert('Introduce tarea');
     }
-
-    alert('Introduce tarea')
   };
 
   return (
