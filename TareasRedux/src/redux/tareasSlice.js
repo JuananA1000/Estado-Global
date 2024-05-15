@@ -6,19 +6,25 @@ const tareasSlice = createSlice({
 
   reducers: {
     addTarea: (state, action) => {
-      state.push(action.payload);
+      const newTodo = {
+        id: Date.now(),
+        texto: action.payload,
+        completada: false,
+      };
+      state.push(newTodo);
     },
 
     eliminarTarea: (state, action) => {
-      return state.filter((tarea) => tarea !== action.payload);
+      const todoId = action.payload;
+      return state.filter((tarea) => tarea.id !== todoId);
     },
 
     completarTarea: (state, action) => {
-      /*
-        IDEA: Esta función creará un div (array) de tareas completadas y las añadirá al clickarlas, a la vez las
-        eliminará de la lista principal 
-      */
-      console.log('completar ');
+      const todoId = action.payload;
+      const todoIndex = state.findIndex((tarea) => tarea.id === todoId);
+      if (todoIndex !== -1) {
+        state[todoIndex].completada = !state[todoIndex].completada;
+      }
     },
   },
 });

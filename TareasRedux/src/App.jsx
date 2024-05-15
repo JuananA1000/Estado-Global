@@ -31,17 +31,17 @@ function App() {
       <h1>Lista de Tareas</h1>
       <div className='task-card'>
         <ul className='task-items'>
-          {tareas.map((tarea, index) => (
-            <li key={index} className={'task-item'}>
-              {tarea}
+          {tareas.map((tarea) => (
+            <li key={tarea.id} className={tarea.completada ? 'task-item-completed' : 'task-item'}>
+              {tarea.texto}
               <div>
-                <img src={check} onClick={() => accionarDispatch(completarTarea(tarea))} width={20} />
+                <img src={check} onClick={() => accionarDispatch(completarTarea(tarea.id))} width={20} />
                 <img
                   style={{ marginLeft: '10px' }}
                   src={garbage}
                   width={20}
                   id='eliminar'
-                  onClick={() => accionarDispatch(eliminarTarea(tarea))}
+                  onClick={() => accionarDispatch(eliminarTarea(tarea.id))}
                 />
               </div>
             </li>
