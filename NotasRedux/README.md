@@ -1,8 +1,8 @@
-# React + Vite
+# Gestor de Notas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Estado de las notas**: Un array de objetos que representan
+  - Id de la nota
+  - nota en sí, con su contenido.
+- **Acciones**: Agregar nota, eliminar nota, editar nota.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Puedes gestionar el estado de las notas con un reducer. Las acciones de agregar, eliminar y editar actualizarían el estado.
