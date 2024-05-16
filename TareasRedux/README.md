@@ -1,8 +1,12 @@
-# React + Vite
+# Lista de Tareas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Estado de la lista de tareas: Un array de objetos con cada tarea, cada objeto contendrá:
+  - un ID
+  - título
+  - estado (completada o no).
+- **Acciones**:
+  - Agregar tarea
+  - Eliminar tarea
+  - Marcar tarea como completada.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para gestionarlo con Redux, crea un reducer que actualice el estado de estas acciones. Al agregar una tarea, el reducer añade un nuevo objeto tarea al array. Al eliminar una tarea, el reducer filtraría el array para eliminar la tarea correspondiente. Al marcar una tarea como completada, el reducer actualizaría el estado de la tarea apropiada.
