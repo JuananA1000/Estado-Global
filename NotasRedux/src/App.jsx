@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNota, eliminarNota } from './redux/notasSlice';
+import { addNota } from './redux/notasSlice';
 
 import './App.css';
 
