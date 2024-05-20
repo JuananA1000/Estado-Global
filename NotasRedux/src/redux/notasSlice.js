@@ -12,8 +12,12 @@ const notasSlice = createSlice({
       };
       state.push(nuevaNota);
     },
+
+    eliminarNota: (state, action) => {
+      return state.filter((nota) => nota.id !== action.payload);
+    },
   },
 });
 
-export const { addNota } = notasSlice.actions;
+export const { addNota, eliminarNota } = notasSlice.actions;
 export default notasSlice.reducer;

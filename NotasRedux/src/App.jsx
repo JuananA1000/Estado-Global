@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNota } from './redux/notasSlice';
+import { addNota, eliminarNota } from './redux/notasSlice';
 
 import './App.css';
 
@@ -23,7 +23,7 @@ function App() {
       <h1>Gestor de Notas</h1>
       <div className='card'>
         {notas.map((nota) => (
-          <div className='nota'>
+          <div key={nota.id} className='nota' onClick={() => console.log('eliminar')}>
             <p>{nota.contenido}</p>
           </div>
         ))}
