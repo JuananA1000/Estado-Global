@@ -1,13 +1,38 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNota } from './redux/notasSlice';
+
 import './App.css';
 
-import Button from './components/Button/Button';
-
 function App() {
+  const [nuevaNota, setNuevaNota] = useState('');
+  const dispatch = useDispatch();
+  const notas = useSelector((state) => state.notas);
+
+  const handleAddNota = () => {
+    if (nuevaNota !== '') {
+      dispatch(addNota(nuevaNota));
+      setNuevaNota('');
+    } else {
+      alert('introduce nota');
+    }
+  };
+
   return (
     <div>
       <h1>Gestor de Notas</h1>
-      <div className='card'>{/* Aquí el código */}</div>
-      <Button>Añadir Nota</Button>
+      <div className='card'>
+        {notas.map((nota) => (
+          <div className='nota'>
+            <p>{nota.contenido}</p>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <textarea value={nuevaNota} onChange={(e) => setNuevaNota(e.target.value)} />
+        <button onClick={handleAddNota}>Agregar Tarea</button>
+      </div>
     </div>
   );
 }
