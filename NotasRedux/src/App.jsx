@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNota } from './redux/notasSlice';
+import { addNota, removeNota } from './redux/notasSlice';
 
 import './App.css';
 
@@ -18,12 +18,16 @@ function App() {
     }
   };
 
+  const handleRemoveNota = () => {
+    dispatch(removeNota(selectNota));
+  };
+
   return (
     <div>
       <h1>Gestor de Notas</h1>
       <div className='card'>
         {notas.map((nota) => (
-          <div key={nota.id} className='nota' onClick={() => console.log('eliminar')}>
+          <div key={nota.id} className={selectNota ? 'nota-selected' : 'nota'} onClick={handleRemoveNota}>
             <p>{nota.contenido}</p>
           </div>
         ))}
@@ -31,7 +35,8 @@ function App() {
 
       <div>
         <textarea value={nuevaNota} onChange={(e) => setNuevaNota(e.target.value)} />
-        <button onClick={handleAddNota}>Agregar Tarea</button>
+        <button onClick={handleAddNota}>Agregar Nota</button>
+        <button onClick={handleRemoveNota}>eliminar Tarea</button>
       </div>
     </div>
   );

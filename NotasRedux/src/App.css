@@ -16,4 +16,11 @@
 
 .nota {
   background-color: #fce684;
+  cursor: pointer;
+}
+
+.nota-selected {
+  background-color: #fce684;
+  border: 2px solid red;
+  
 }

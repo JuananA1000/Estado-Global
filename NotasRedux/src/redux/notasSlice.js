@@ -1,32 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Función para cargar notas desde localStorage
-const cargarNotas = () => {
-  const notasGuardadas = localStorage.getItem('notas');
-  return notasGuardadas ? JSON.parse(notasGuardadas) : [];
-};
+// const cargarNotas = () => {
+//   const notasGuardadas = localStorage.getItem('notas');
+//   return notasGuardadas ? JSON.parse(notasGuardadas) : [];
+// };
 
-// Función para guardar notas en localStorage
-const guardarNotas = (notas) => {
-  localStorage.setItem('notas', JSON.stringify(notas));
-};
+// const guardarNotas = (notas) => {
+//   localStorage.setItem('notas', JSON.stringify(notas));
+// };
 
 const notasSlice = createSlice({
   name: 'notas',
-  initialState: cargarNotas(),
+  initialState: [],
   reducers: {
     addNota: (state, action) => {
-      const newNota = {
+      const nuevaNota = {
         id: Date.now(),
         contenido: action.payload,
       };
-      const newState = [...state, newNota];
-      guardarNotas(newState);
-      return newState;
+      // const newState = [...state, newNota];
+      // guardarNotas(newState);
+      // return newState;
+      state.push(nuevaNota);
     },
-    // Otros reducers como deleteNota pueden ir aquí
+
+    removeNota: (state, action) => {
+      // const notasDOM = state.filter((nota) => nota.id !== action.payload);
+      // localStorage.setItem('notas', JSON.stringify(notasDOM));
+      // return notasDOM;
+      return state.filter((nota) => nota.id !== action.payload);
+    },
   },
 });
 
-export const { addNota } = notasSlice.actions;
+export const { addNota, removeNota } = notasSlice.actions;
 export default notasSlice.reducer;
