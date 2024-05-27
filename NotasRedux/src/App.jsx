@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNota, removeNota } from './redux/notasSlice';
+import { addNota, removeNota, editNota } from './redux/notasSlice';
 
 import './App.css';
 
 function App() {
   const [nuevaNota, setNuevaNota] = useState('');
   const [notaSeleccionada, setNotaSeleccionada] = useState(null);
+  const [editandoNota, setEditandoNota] = useState('');
+
   const dispatch = useDispatch();
   const notas = useSelector((state) => state.notas);
 
@@ -21,11 +23,20 @@ function App() {
 
   const handleSelectNota = (notaId) => {
     setNotaSeleccionada(notaId);
+    setEditandoNota(notaId.contenido);
   };
 
   const handleRemoveNota = (notaId) => {
     dispatch(removeNota(notaId));
     setNotaSeleccionada(null);
+  };
+
+  const handleEditNota = () => {
+    if (notaSeleccionada !== null && editandoNota !== '') {
+      dispatch(editNota({ id: notaSeleccionada, contenido: editandoNota }));
+      setNotaSeleccionada(null);
+      setEditandoNota('');
+    }
   };
 
   useEffect(() => {
@@ -50,7 +61,8 @@ function App() {
           <div
             key={nota.id}
             className={notaSeleccionada === nota.id ? 'nota nota-selected' : 'nota'}
-            onClick={() => handleSelectNota(nota.id)}>
+            onClick={() => handleSelectNota(nota.id)}
+            onDoubleClick={() => handleEditNota(nota.id)}>
             <p>{nota.contenido}</p>
           </div>
         ))}
@@ -60,6 +72,14 @@ function App() {
         <textarea value={nuevaNota} onChange={(e) => setNuevaNota(e.target.value)} />
         <button onClick={handleAddNota}>Agregar Nota</button>
       </div>
+
+      {notaSeleccionada !== null && (
+        <div>
+          <h2>Editar Nota</h2>
+          <textarea value={editandoNota} onChange={(e) => setEditandoNota(e.target.value)} />
+          <button onClick={handleEditNota}>Guardar Cambios</button>
+        </div>
+      )}
     </div>
   );
 }
