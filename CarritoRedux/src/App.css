@@ -3,6 +3,15 @@
   text-align: center;
 }
 
+header{
+  justify-content: center;
+  display: flex;
+}
+
+#carrito{
+  margin-left: 200px;
+}
+
 .card {
   display: flex;
   padding: 2em;
@@ -11,7 +20,7 @@
 }
 
 .producto {
-  background-color: rgb(240, 240, 240);
+  background-color: #f0f0f0;
   border-radius: 10px;
   width: 200px;
 }

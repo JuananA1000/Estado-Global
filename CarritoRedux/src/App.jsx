@@ -1,11 +1,17 @@
 import instrumentos from './data/instrumentosData.js';
 
+import Carrito from './img/carrito.svg';
+
 import './App.css';
 
 function App() {
   return (
     <div>
-      <h1>Carrito de compras</h1>
+      <header>
+        <h1>Carrito de compras</h1>
+        <img src={Carrito} alt='carrito' width={40} id='carrito' />
+      </header>
+
       <div className='card'>
         {instrumentos.map((instrumento, index) => (
           <div className='producto' key={index}>
