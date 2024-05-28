@@ -4,5 +4,14 @@
 }
 
 .card {
+  display: flex;
   padding: 2em;
+  width: 1000px;
+  justify-content: space-between;
+}
+
+.producto {
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  width: 200px;
 }
