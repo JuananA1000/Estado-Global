@@ -1,26 +1,49 @@
 #root {
   margin: 0 auto;
+  margin-bottom: 300px;
   padding: 2rem;
   text-align: center;
 }
 
-.card {
-  background-color: #d0d0d0;
+.corcho {
+  background-color: #c2965c;
+  border: 7px solid #deb887;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   margin: 0 auto;
   max-width: 600px;
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  width: 3000px;
+  height: 200px;
+}
+
+.pin {
+  width: 10px;
+  height: 10px;
+  background-color: #f00c0c;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 7px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .nota {
-  background-color: #fce684;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  width: 100px;
+  height: 100px;
+  background-color: #fffacd; /* Color de nota */
+  top: 50px;
+  left: 50px;
+  transform: rotate(-5deg); /* Rotación para un efecto más realista */
+  border: 1px solid #ffd700; /* Bordes de la nota */
+  padding: 10px;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
 .nota-selected {
-  background-color: #fce684;
   border: 2px solid red;
-  
 }

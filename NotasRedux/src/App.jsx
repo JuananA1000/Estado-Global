@@ -56,13 +56,14 @@ function App() {
   return (
     <div>
       <h1>Gestor de Notas</h1>
-      <div className='card'>
+      <div className='corcho'>
         {notas.map((nota) => (
           <div
             key={nota.id}
             className={notaSeleccionada === nota.id ? 'nota nota-selected' : 'nota'}
             onClick={() => handleSelectNota(nota.id)}
             onDoubleClick={() => handleEditNota(nota.id)}>
+            <div className='pin'></div>
             <p>{nota.contenido}</p>
           </div>
         ))}
