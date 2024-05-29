@@ -1,6 +1,6 @@
 import instrumentos from './data/instrumentosData.js';
 
-import Carrito from './img/carrito.svg';
+import carrito from './img/carrito.svg';
 
 import './App.css';
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <header>
         <h1>Carrito de compras</h1>
-        <img src={Carrito} alt='carrito' width={40} id='carrito' />
+        <img src={carrito} alt='carrito' width={40} id='carrito' />
       </header>
 
       <div className='card'>
