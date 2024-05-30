@@ -24,3 +24,8 @@ header{
   border-radius: 10px;
   width: 200px;
 }
+
+.carrito{
+  background-color: red;
+  z-index: 1;
+}

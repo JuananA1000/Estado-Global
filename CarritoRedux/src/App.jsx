@@ -18,6 +18,21 @@ function App() {
       <header>
         <h1>Carrito de compras</h1>
         <img src={carritoIcon} alt='carrito' width={40} id='carrito' />
+        <div className='carrito'>
+          {carrito.length === 0 ? (
+            <p>El carrito está vacío</p>
+          ) : (
+            <ul>
+              {carrito.map((item, index) => (
+                <li key={index}>
+                  <img src={item.img} alt={item.nombre} width={50} />
+                  <span>{item.nombre}</span>
+                  <span>{item.precio} €</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </header>
 
       <div className='card'>
