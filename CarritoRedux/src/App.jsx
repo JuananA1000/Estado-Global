@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import instrumentos from './data/instrumentosData.js';
 import carritoIcon from './img/carrito.svg';
 
+import { addInstrumento } from './redux/carritoSlice.js';
+
 import './App.css';
-import { addProducto } from './redux/carritoSlice.js';
 
 function App() {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
+
+  console.log('Carrito: ', carrito);
 
   return (
     <div>
@@ -23,7 +26,7 @@ function App() {
             <img src={instrumento.img} alt={instrumento.nombre} width={150} />
             <p>{instrumento.nombre}</p>
             <p>{instrumento.precio} €</p>
-            <button onClick={() => dispatch(addProducto())}>Añadir</button>
+            <button onClick={() => dispatch(addInstrumento(instrumento))}>Añadir</button>
           </div>
         ))}
       </div>

@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import instrumentos from '../data/instrumentosData';
+
 const carritoSlice = createSlice({
   name: 'carrito',
   initialState: [],
   reducers: {
-    addProducto: (state, action) => {
-      console.log('addProducto carritoSlice');
+    addInstrumento: (state, action) => {
+      const instrumento = instrumentos.find((item) => item === action.payload);
+      state.push(instrumento);
     },
   },
 });
 
-export const { addProducto } = carritoSlice.actions;
+export const { addInstrumento } = carritoSlice.actions;
 export default carritoSlice.reducer;
