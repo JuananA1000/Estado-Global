@@ -9,12 +9,12 @@ import './App.css';
 
 function App() {
   const [nuevaTarea, setNuevaTarea] = useState('');
-  const accionarDispatch = useDispatch();
+  const ejecutarFuncion = useDispatch();
   const tareas = useSelector((state) => state.tareas);
 
   const handleAddTask = () => {
     if (nuevaTarea !== '') {
-      accionarDispatch(addTarea(nuevaTarea));
+      ejecutarFuncion(addTarea(nuevaTarea));
       setNuevaTarea('');
     } else {
       alert('Introduce tarea');
@@ -30,13 +30,13 @@ function App() {
             <li key={tarea.id} className={tarea.completada ? 'task-item-completed' : 'task-item'}>
               {tarea.texto}
               <div>
-                <img src={check} onClick={() => accionarDispatch(completarTarea(tarea.id))} width={20} />
+                <img src={check} onClick={() => ejecutarFuncion(completarTarea(tarea.id))} width={20} />
                 <img
                   style={{ marginLeft: '10px' }}
                   src={garbage}
                   width={20}
                   id='eliminar'
-                  onClick={() => accionarDispatch(eliminarTarea(tarea.id))}
+                  onClick={() => ejecutarFuncion(eliminarTarea(tarea.id))}
                 />
               </div>
             </li>
