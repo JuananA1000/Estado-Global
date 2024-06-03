@@ -5,12 +5,15 @@ import instrumentos from './data/instrumentosData.js';
 import carritoIcon from './img/carrito.svg';
 import garbageIcon from './img/garbage.svg';
 
+import Cantidad from './components/Cantidad.jsx';
+
 import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
 
 import './App.css';
 
 function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
+  const [mostrarCantidad, setMostrarCantidad] = useState(0);
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
@@ -27,6 +30,7 @@ function App() {
           width={40}
           id='carrito-icon'
         />
+        <Cantidad>{mostrarCantidad}</Cantidad>
         <div className='carrito'>
           {mostrarCarrito ? (
             <ul>
@@ -37,7 +41,10 @@ function App() {
                   <span>{item.precio} €</span>
                   <img
                     src={garbageIcon}
-                    onClick={() => dispatch(eliminarInstrumento(item.nombre))}
+                    onClick={() => {
+                      dispatch(eliminarInstrumento(item.nombre));
+                      setMostrarCantidad(mostrarCantidad - 1);
+                    }}
                     alt='papelera'
                     width={25}
                   />
@@ -56,7 +63,13 @@ function App() {
             <img src={instrumento.img} alt={instrumento.nombre} width={150} />
             <p>{instrumento.nombre}</p>
             <p>{instrumento.precio} €</p>
-            <button onClick={() => dispatch(addInstrumento(instrumento))}>Añadir</button>
+            <button
+              onClick={() => {
+                dispatch(addInstrumento(instrumento));
+                setMostrarCantidad(mostrarCantidad + 1);
+              }}>
+              Añadir
+            </button>
           </div>
         ))}
       </div>
