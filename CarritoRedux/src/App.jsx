@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import instrumentos from './data/instrumentosData.js';
@@ -9,6 +10,7 @@ import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
 import './App.css';
 
 function App() {
+  const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
@@ -18,10 +20,16 @@ function App() {
     <div>
       <header>
         <h1>Carrito de compras</h1>
-        <img src={carritoIcon} alt='carrito' width={40} id='carrito' />
+        <img
+          src={carritoIcon}
+          onClick={() => setMostrarCarrito(!mostrarCarrito)}
+          alt='carrito'
+          width={40}
+          id='carrito-icon'
+        />
         <div className='carrito'>
-          {carrito.length === 0 ? (
-            <p>El carrito está vacío</p>
+          {mostrarCarrito ? (
+            ''
           ) : (
             <ul>
               {carrito.map((item, index) => (
