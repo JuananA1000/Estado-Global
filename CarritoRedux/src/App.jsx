@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import instrumentos from './data/instrumentosData.js';
 import carritoIcon from './img/carrito.svg';
+import garbageIcon from './img/garbage.svg';
 
-import { addInstrumento } from './redux/carritoSlice.js';
+import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
 
 import './App.css';
 
@@ -28,6 +29,12 @@ function App() {
                   <img src={item.img} alt={item.nombre} width={50} />
                   <span>{item.nombre}</span>
                   <span>{item.precio} €</span>
+                  <img
+                    src={garbageIcon}
+                    onClick={() => dispatch(eliminarInstrumento(item.nombre))}
+                    alt='papelera'
+                    width={25}
+                  />
                 </li>
               ))}
             </ul>

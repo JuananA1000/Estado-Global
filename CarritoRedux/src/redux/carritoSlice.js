@@ -10,8 +10,12 @@ const carritoSlice = createSlice({
       const instrumento = instrumentos.find((item) => item === action.payload);
       state.push(instrumento);
     },
+
+    eliminarInstrumento: (state, action) => {
+      return state.filter((instrumento) => instrumento.nombre !== action.payload);
+    },
   },
 });
 
-export const { addInstrumento } = carritoSlice.actions;
+export const { addInstrumento, eliminarInstrumento } = carritoSlice.actions;
 export default carritoSlice.reducer;
