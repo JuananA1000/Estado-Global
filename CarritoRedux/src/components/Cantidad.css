@@ -1,7 +1,9 @@
 #cantidad {
-  width: 10px;
-  height: 10px;
-  right: 300px;
+  color: azure;
+  width: 20px;
+  height: 20px;
+  right: 40px;
+  top: 70px;
   position: relative;
   background-color: orangered;
   padding: 2px;
