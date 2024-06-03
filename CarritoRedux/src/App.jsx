@@ -29,8 +29,6 @@ function App() {
         />
         <div className='carrito'>
           {mostrarCarrito ? (
-            ''
-          ) : (
             <ul>
               {carrito.map((item, index) => (
                 <li key={index}>
@@ -46,6 +44,8 @@ function App() {
                 </li>
               ))}
             </ul>
+          ) : (
+            ''
           )}
         </div>
       </header>
