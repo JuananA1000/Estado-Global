@@ -12,6 +12,7 @@ header {
   margin-left: 200px;
 }
 
+
 .card {
   display: flex;
   padding: 2em;
@@ -26,15 +27,10 @@ header {
 }
 
 .carrito {
-  right: 70px;
-  top: 130px;
-  width: 280px;
-  position: absolute;
   background-color: red;
+  padding: 10px;
 }
-.carrito ul li {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr;
+article div{
+  text-align: right;
   margin-bottom: 10px;
-  list-style: none;
 }

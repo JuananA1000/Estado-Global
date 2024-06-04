@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import instrumentos from './data/instrumentosData.js';
+
 import carritoIcon from './img/carrito.svg';
 import garbageIcon from './img/garbage.svg';
 
@@ -17,8 +18,6 @@ function App() {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
-  console.log('Carrito: ', carrito);
-
   return (
     <div>
       <header>
@@ -30,27 +29,34 @@ function App() {
           width={40}
           id='carrito-icon'
         />
+        {/* Burbuja de cantidad */}
         <Cantidad>{mostrarCantidad}</Cantidad>
-        <div className='carrito'>
+        <div>
           {mostrarCarrito ? (
-            <ul>
+            <div className='carrito'>
               {carrito.map((item, index) => (
-                <li key={index}>
-                  <img src={item.img} alt={item.nombre} width={50} />
-                  <span>{item.nombre}</span>
-                  <span>{item.precio} €</span>
-                  <img
-                    src={garbageIcon}
-                    onClick={() => {
-                      dispatch(eliminarInstrumento(item.nombre));
-                      setMostrarCantidad(mostrarCantidad - 1);
-                    }}
-                    alt='papelera'
-                    width={25}
-                  />
-                </li>
+                <article key={index}>
+                  <div>
+                    <img src={item.img} alt={item.nombre} width={50} />
+                    <span>{item.nombre}</span>
+                    <span>{item.precio} €</span>
+                    <img
+                      src={garbageIcon}
+                      onClick={() => {
+                        dispatch(eliminarInstrumento(item.nombre));
+                        setMostrarCantidad(mostrarCantidad - 1);
+                      }}
+                      alt='papelera'
+                      width={25}
+                    />
+                  </div>
+
+                  <div>
+                    <b>Total:</b> 000€
+                  </div>
+                </article>
               ))}
-            </ul>
+            </div>
           ) : (
             ''
           )}
