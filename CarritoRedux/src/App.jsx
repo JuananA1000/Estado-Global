@@ -8,13 +8,13 @@ import garbageIcon from './img/garbage.svg';
 
 import Cantidad from './components/Cantidad.jsx';
 
-import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
+import { addInstrumento, eliminarInstrumento, mostrarCantidad } from './redux/carritoSlice.js';
 
 import './App.css';
 
 function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
-  const [mostrarCantidad, setMostrarCantidad] = useState(0);
+  // const [mostrarCantidad, setMostrarCantidad] = useState(0);
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
@@ -30,7 +30,7 @@ function App() {
           id='carrito-icon'
         />
         {/* Burbuja de cantidad */}
-        <Cantidad>{mostrarCantidad}</Cantidad>
+        <Cantidad>0</Cantidad>
         <div>
           {mostrarCarrito ? (
             <div className='carrito'>
@@ -44,7 +44,7 @@ function App() {
                       src={garbageIcon}
                       onClick={() => {
                         dispatch(eliminarInstrumento(item.nombre));
-                        setMostrarCantidad(mostrarCantidad - 1);
+                        // setMostrarCantidad(mostrarCantidad - 1);
                       }}
                       alt='papelera'
                       width={25}
@@ -72,7 +72,8 @@ function App() {
             <button
               onClick={() => {
                 dispatch(addInstrumento(instrumento));
-                setMostrarCantidad(mostrarCantidad + 1);
+                dispatch(mostrarCantidad(instrumento));
+                // setMostrarCantidad(mostrarCantidad + 1);
               }}>
               Añadir
             </button>
