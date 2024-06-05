@@ -37,6 +37,7 @@ function App() {
               {carrito.map((item, index) => (
                 <article key={index}>
                   <div>
+                    <p> x{item.cantidad}</p>
                     <img src={item.img} alt={item.nombre} width={50}/>
                     <span>{item.nombre}</span>
                     <span>{item.precio} €</span>
