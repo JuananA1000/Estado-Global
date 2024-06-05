@@ -7,7 +7,7 @@ const carritoSlice = createSlice({
   initialState: [],
   reducers: {
     addInstrumento: (state, action) => {
-      const instrumento = instrumentos.find((item) => item === action.payload);
+      const instrumento = instrumentos.find((instrumento) => instrumento === action.payload);
       state.push(instrumento);
     },
 
@@ -17,10 +17,8 @@ const carritoSlice = createSlice({
 
     mostrarCantidad: (state, action) => {
       /*
-        PENDIENTE: sirva esta función para actualizar la cantidad total de artículos en el carrito y la de los que se
-        repitan.
+        PENDIENTE: sirva esta función para actualizar la cantidad de artículos que se repitan.
       */
-      const cantidad = state.length;
 
       const conteoDeInstrumentos = {};
       state.forEach((instrumentos) => {
@@ -31,7 +29,6 @@ const carritoSlice = createSlice({
         }
       });
 
-      console.log('Mostrar cantidad: ', cantidad);
       console.log('Mostrar conteoDeInstrumentos: ', conteoDeInstrumentos);
     },
   },

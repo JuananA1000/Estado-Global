@@ -15,6 +15,7 @@ import './App.css';
 function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const [totalProductos, setTotalProductos] = useState(0);
+
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
@@ -36,7 +37,7 @@ function App() {
               {carrito.map((item, index) => (
                 <article key={index}>
                   <div>
-                    <img src={item.img} alt={item.nombre} width={50} />
+                    <img src={item.img} alt={item.nombre} width={50}/>
                     <span>{item.nombre}</span>
                     <span>{item.precio} €</span>
                     <img
@@ -64,7 +65,7 @@ function App() {
       <div className='card'>
         {instrumentos.map((instrumento, index) => (
           <div className='producto' key={index}>
-            <img src={instrumento.img} alt={instrumento.nombre} width={150} />
+            <img src={instrumento.img} alt={instrumento.nombre}  className='item-img'  />
             <p>{instrumento.nombre}</p>
             <p>{instrumento.precio} €</p>
             <button
