@@ -6,22 +6,24 @@ const carritoSlice = createSlice({
   name: 'carrito',
   initialState: [],
   reducers: {
-    addInstrumento: (state, action) => {
-      const instrumento = instrumentos.find((instrumento) => instrumento === action.payload);
-      state.push(instrumento);
+    // addInstrumento: (state, action) => {
+    //   const instrumento = instrumentos.find((instrumento) => instrumento === action.payload);
+    //   state.push(instrumento);
+    // },
 
+    addInstrumento: (state, action) => {
+      const instrumento = action.payload;
+      const enElCarrito = state.find((item) => item.nombre === instrumento.nombre);
+
+      if (enElCarrito) {
+        enElCarrito.cantidad += 1;
+      } else {
+        state.push({ ...instrumento, cantidad: 1 });
+      }
     },
 
     eliminarInstrumento: (state, action) => {
       return state.filter((instrumento) => instrumento.nombre !== action.payload);
-    },
-
-    mostrarCantidad: (state, action) => {
-      /*
-        PENDIENTE: sirva esta función para actualizar la cantidad de artículos que se repitan.
-      */
-
-      return state.map((instrumento) => `${instrumento.nombre} x${instrumento}`);
     },
   },
 });
