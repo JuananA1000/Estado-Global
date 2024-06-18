@@ -8,7 +8,7 @@ import garbageIcon from './img/garbage.svg';
 
 import Cantidad from './components/Cantidad.jsx';
 
-import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
+import { addInstrumento, eliminarInstrumento, precioTotal } from './redux/carritoSlice.js';
 
 import './App.css';
 
@@ -19,6 +19,9 @@ function App() {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
+  const handleTotal = (total) => {
+    dispatch(precioTotal(total));
+  };
   return (
     <div>
       <header>
@@ -55,7 +58,8 @@ function App() {
                 </article>
               ))}
               <div>
-                <b>Total:</b> 000€
+                <b>Total:</b>
+                {handleTotal(total)} 000€
               </div>
             </div>
           ) : (

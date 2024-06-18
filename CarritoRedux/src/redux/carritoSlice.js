@@ -27,8 +27,19 @@ const carritoSlice = createSlice({
         }
       }
     },
+
+    precioTotal: (state, action) => {
+      const instrumento = action.payload;
+      const enElCarrito = state.find((item) => item.nombre === instrumento.nombre);
+      let total = 0;
+
+      if (enElCarrito) {
+        total += enElCarrito.precio;
+        console.log('precioTotal: ', total);
+      }
+    },
   },
 });
 
-export const { addInstrumento, eliminarInstrumento } = carritoSlice.actions;
+export const { addInstrumento, eliminarInstrumento,precioTotal } = carritoSlice.actions;
 export default carritoSlice.reducer;
