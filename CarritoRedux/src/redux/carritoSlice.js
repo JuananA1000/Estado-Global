@@ -16,7 +16,16 @@ const carritoSlice = createSlice({
     },
 
     eliminarInstrumento: (state, action) => {
-      return state.filter((instrumento) => instrumento.nombre !== action.payload);
+      const instrumento = action.payload;
+      const enElCarrito = state.find((item) => item.nombre === instrumento.nombre);
+
+      if (enElCarrito) {
+        if (enElCarrito.cantidad > 1) {
+          enElCarrito.cantidad -= 1;
+        } else {
+          return state.filter((item) => item.nombre !== instrumento.nombre);
+        }
+      }
     },
   },
 });

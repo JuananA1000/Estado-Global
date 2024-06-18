@@ -38,13 +38,14 @@ function App() {
                 <article key={index}>
                   <div>
                     <p> x{item.cantidad}</p>
-                    <img src={item.img} alt={item.nombre} width={50}/>
+                    <img src={item.img} alt={item.nombre} width={50} />
                     <span>{item.nombre}</span>
                     <span>{item.precio} €</span>
                     <img
+                      id='eliminar-producto'
                       src={garbageIcon}
                       onClick={() => {
-                        dispatch(eliminarInstrumento(item.nombre));
+                        dispatch(eliminarInstrumento(item));
                         setTotalProductos(totalProductos - 1);
                       }}
                       alt='papelera'
@@ -66,7 +67,7 @@ function App() {
       <div className='card'>
         {instrumentos.map((instrumento, index) => (
           <div className='producto' key={index}>
-            <img src={instrumento.img} alt={instrumento.nombre}  className='item-img'  />
+            <img src={instrumento.img} alt={instrumento.nombre} className='item-img' />
             <p>{instrumento.nombre}</p>
             <p>{instrumento.precio} €</p>
             <button
