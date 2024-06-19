@@ -29,14 +29,7 @@ const carritoSlice = createSlice({
     },
 
     precioTotal: (state, action) => {
-      const instrumento = action.payload;
-      const enElCarrito = state.find((item) => item.nombre === instrumento.nombre);
-      let total = 0;
-
-      if (enElCarrito) {
-        total += enElCarrito.precio;
-        console.log('precioTotal: ', total);
-      }
+      console.log('Calcular precio total');
     },
   },
 });
