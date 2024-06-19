@@ -6,7 +6,7 @@ const carritoSlice = createSlice({
   reducers: {
     addInstrumento: (state, action) => {
       const instrumento = action.payload;
-      const enElCarrito = state.find(i => i.nombre === instrumento.nombre);
+      const enElCarrito = state.find((i) => i.nombre === instrumento.nombre);
 
       if (enElCarrito) {
         enElCarrito.cantidad += 1;
@@ -34,5 +34,5 @@ const carritoSlice = createSlice({
   },
 });
 
-export const { addInstrumento, eliminarInstrumento,precioTotal } = carritoSlice.actions;
+export const { addInstrumento, eliminarInstrumento, precioTotal } = carritoSlice.actions;
 export default carritoSlice.reducer;
