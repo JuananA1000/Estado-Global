@@ -1,6 +1,6 @@
 # Redux Toolkit
 
-Redux Toolkit es, hasta la fecha, la herramienta adecuada para manejar el **estado global** de las aplicaciones ReactJS
+**Redux Toolkit** es, hasta la fecha, la herramienta adecuada para manejar el **estado global** de las aplicaciones ReactJS
 
 ## Instalación 
 
