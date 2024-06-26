@@ -1,0 +1,14 @@
+#cantidad {
+  color: azure;
+  width: 20px;
+  height: 20px;
+  right: 40px;
+  top: 70px;
+  position: relative;
+  background-color: orangered;
+  padding: 2px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
