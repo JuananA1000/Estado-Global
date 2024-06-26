@@ -7,6 +7,11 @@ import './App.css';
 
 function App() {
   const [nuevaTarea, setNuevaTarea] = useState('');
+  const [completada, setCompletada] = useState(false);
+
+  const toggleCompletar = () => {
+    setCompletada(!completada);
+  };
 
   return (
     <div className='task-list'>
@@ -31,10 +36,10 @@ function App() {
 
         {/* PENDIENTE: Eliminar este ul */}
         <ul className='task-items'>
-          <li className='task-item'>
+          <li className={completada ? 'task-item-completed' : 'task-item'}>
             Tarea ejemplo, borrar despues
             <div>
-              <img src={check} width={20} />
+              <img src={check} width={20} onClick={() => setCompletada(!completada)} />
               <img style={{ marginLeft: '10px' }} src={garbage} width={20} id='eliminar' />
             </div>
           </li>
