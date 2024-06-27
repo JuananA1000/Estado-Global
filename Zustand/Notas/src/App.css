@@ -32,14 +32,29 @@
   box-shadow: 1px 1px 10px #00000080;
   width: 100px;
   height: 100px;
-  background-color: #fffacd; /* Color de nota */
+  background-color: #fffacd;
   top: 50px;
   left: 50px;
-  transform: rotate(-5deg); /* Rotación para un efecto más realista */
-  border: 1px solid #ffd700; /* Bordes de la nota */
+  transform: rotate(-5deg);
+  border: 1px solid #ffd700;
   padding: 10px;
   box-sizing: border-box;
   cursor: pointer;
+  user-select: none;
+}
+.nota-selected {
+  box-shadow: 1px 1px 10px #00000080;
+  width: 100px;
+  height: 100px;
+  background-color: #fffacd;
+  top: 50px;
+  left: 50px;
+  transform: rotate(-5deg);
+  border: 2px solid red;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
 }
 
 .agregar-nota {
@@ -57,8 +72,4 @@ textarea {
 }
 button {
   height: 50px;
-}
-
-.nota-selected {
-  border: 2px solid red;
 }

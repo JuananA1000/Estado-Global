@@ -9,10 +9,6 @@ function App() {
   const [nuevaTarea, setNuevaTarea] = useState('');
   const [completada, setCompletada] = useState(false);
 
-  const toggleCompletar = () => {
-    setCompletada(!completada);
-  };
-
   return (
     <div className='task-list'>
       <h1>Lista de Tareas</h1>
