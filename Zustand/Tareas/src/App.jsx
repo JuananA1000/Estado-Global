@@ -8,7 +8,6 @@ import './App.css';
 
 function App() {
   const [textoNuevaTarea, setTextoNuevaTarea] = useState('');
-  const [completada, setCompletada] = useState(false);
 
   const { tareas, addTarea, completarTarea } = tareasStore();
 
@@ -18,8 +17,6 @@ function App() {
       addTarea(nuevaTarea);
       setTextoNuevaTarea('');
     }
-
-    console.log('añadir');
   };
 
   return (
