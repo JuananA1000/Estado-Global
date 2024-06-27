@@ -6,7 +6,7 @@
 
 Instalaremos **Zustand** en nuestro proyecto, con el siguiente comando:
 
-#### Instalar Toolkit
+#### Instalar Zustand
 
 ```http
     npm install zustand
