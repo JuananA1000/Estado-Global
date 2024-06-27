@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import instrumentos from './data/instrumentosData.js';
 
@@ -8,16 +7,11 @@ import garbageIcon from './img/garbage.svg';
 
 import Cantidad from './components/Cantidad.jsx';
 
-import { addInstrumento, eliminarInstrumento } from './redux/carritoSlice.js';
-
 import './App.css';
 
 function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const [totalProductos, setTotalProductos] = useState(0);
-
-  const dispatch = useDispatch();
-  const carrito = useSelector((state) => state.carrito);
 
   return (
     <div>
@@ -34,26 +28,24 @@ function App() {
         <div>
           {mostrarCarrito ? (
             <div className='carrito'>
-              {carrito.map((item, index) => (
-                <article key={index}>
-                  <div>
-                    <p> x{item.cantidad}</p>
-                    <img src={item.img} alt={item.nombre} width={50} />
-                    <span>{item.nombre}</span>
-                    <span>{item.precio} €</span>
-                    <img
-                      id='eliminar-producto'
-                      src={garbageIcon}
-                      onClick={() => {
-                        dispatch(eliminarInstrumento(item));
-                        setTotalProductos(totalProductos - 1);
-                      }}
-                      alt='papelera'
-                      width={25}
-                    />
-                  </div>
-                </article>
-              ))}
+              <article>
+                <div>
+                  <p> xcantidad</p>
+                  {/* <img src={item.img} alt={item.nombre} width={50} /> */}
+                  <span>nombre</span>
+                  <span>precio €</span>
+                  <img
+                    id='eliminar-producto'
+                    src={garbageIcon}
+                    onClick={() => {
+                      setTotalProductos(totalProductos - 1);
+                    }}
+                    alt='papelera'
+                    width={25}
+                  />
+                </div>
+              </article>
+
               <div>
                 <b>Total:</b> 000€
               </div>
@@ -72,7 +64,6 @@ function App() {
             <p>{instrumento.precio} €</p>
             <button
               onClick={() => {
-                dispatch(addInstrumento(instrumento));
                 setTotalProductos(totalProductos + 1);
               }}>
               Añadir
