@@ -10,7 +10,7 @@ function App() {
   const [textoNuevaTarea, setTextoNuevaTarea] = useState('');
   const [completada, setCompletada] = useState(false);
 
-  const { tareas, addTarea } = tareasStore();
+  const { tareas, addTarea, completarTarea } = tareasStore();
 
   const handleAñadirTarea = () => {
     if (textoNuevaTarea !== '') {
@@ -28,13 +28,10 @@ function App() {
       <div className='task-card'>
         <ul className='task-items'>
           {tareas.map((tarea) => (
-            <li
-              key={tarea.id}
-              // className={tarea.completada ? 'task-item-completed' : 'task-item'}
-              className='task-item'>
+            <li key={tarea.id} className={tarea.completada ? 'task-item-completed' : 'task-item'}>
               {tarea.texto}
               <div>
-                <img src={check} width={20} />
+                <img src={check} width={20} onClick={() => completarTarea(tarea.id)} />
                 <img style={{ marginLeft: '10px' }} src={garbage} width={20} id='eliminar' />
               </div>
             </li>

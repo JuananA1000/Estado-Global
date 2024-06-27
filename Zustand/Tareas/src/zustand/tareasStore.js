@@ -6,4 +6,16 @@ export const tareasStore = create((set) => ({
   addTarea: (tarea) => {
     set((estado) => ({ tareas: [...estado.tareas, tarea] }));
   },
+
+  eliminarTarea: () => {
+    // codigo
+  },
+
+  completarTarea: (tareaId) => {
+    set((estado) => ({
+      tareas: estado.tareas.map((tarea) =>
+        tarea.id === tareaId ? { ...tarea, completada: !tarea.completada } : tarea
+      ),
+    }));
+  },
 }));
