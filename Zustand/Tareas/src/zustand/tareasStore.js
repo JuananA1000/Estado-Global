@@ -7,8 +7,8 @@ export const tareasStore = create((set) => ({
     set((estado) => ({ tareas: [...estado.tareas, tarea] }));
   },
 
-  eliminarTarea: () => {
-    // codigo
+  eliminarTarea: (id) => {
+    set((estado) => ({ tareas: estado.tareas.filter((tarea) => tarea.id !== id) }));
   },
 
   completarTarea: (tareaId) => {

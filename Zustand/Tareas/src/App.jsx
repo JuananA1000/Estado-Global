@@ -9,7 +9,7 @@ import './App.css';
 function App() {
   const [textoNuevaTarea, setTextoNuevaTarea] = useState('');
 
-  const { tareas, addTarea, completarTarea } = tareasStore();
+  const { tareas, addTarea, completarTarea, eliminarTarea } = tareasStore();
 
   const handleAñadirTarea = () => {
     if (textoNuevaTarea !== '') {
@@ -29,7 +29,13 @@ function App() {
               {tarea.texto}
               <div>
                 <img src={check} width={20} onClick={() => completarTarea(tarea.id)} />
-                <img style={{ marginLeft: '10px' }} src={garbage} width={20} id='eliminar' />
+                <img
+                  style={{ marginLeft: '10px' }}
+                  src={garbage}
+                  width={20}
+                  id='eliminar'
+                  onClick={() => eliminarTarea(tarea.id)}
+                />
               </div>
             </li>
           ))}
