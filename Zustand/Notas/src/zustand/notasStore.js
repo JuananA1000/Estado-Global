@@ -7,8 +7,8 @@ export const notasStore = create((set) => ({
     set((estado) => ({ notas: [...estado.notas, nota] }));
   },
 
-  eliminarNota: () => {
-    // codigo
+  eliminarNota: (id) => {
+    set((estado) => ({ notas: estado.notas.filter((nota) => nota.id !== id) }));
   },
 
   editarNota: () => {
