@@ -13,5 +13,7 @@ export const notasStore = create((set) => ({
 
   editarNota: () => {
     // codigo
+
+    set((estado) => console.log('Estado: ', estado));
   },
 }));

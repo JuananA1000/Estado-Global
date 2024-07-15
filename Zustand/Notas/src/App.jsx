@@ -49,7 +49,10 @@ function App() {
 
       <div className='agregar-nota'>
         <textarea value={notaTexto} onChange={(e) => setNotaTexto(e.target.value)} />
-        <button onClick={handleAddNota}>Agregar Nota</button>
+        <button onClick={handleAddNota}>
+          {/* Agregar Nota */}
+          {notaSeleccionada !== null ? 'Guardar Cambios' : 'Agregar Nota'}
+        </button>
       </div>
     </div>
   );
