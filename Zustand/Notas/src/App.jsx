@@ -5,18 +5,32 @@ import './App.css';
 
 function App() {
   const [notaTexto, setNotaTexto] = useState('');
-  const [notaSeleccionada, setNotaSeleccionada] = useState(false);
+  const [notaSeleccionada, setNotaSeleccionada] = useState(null);
 
   const { notas, addNota, eliminarNota, editarNota } = notasStore();
 
   const handleAddNota = () => {
-    // code
     if (notaTexto !== '') {
-      const nuevaNota = { id: Date.now(), contenido: notaTexto };
-      addNota(nuevaNota);
+      addNota({ id: Date.now(), contenido: notaTexto });
       setNotaTexto('');
+    } else {
+      alert('Introduce una nota');
     }
   };
+
+  const handleEliminarNota = (e) => {
+    if (e.key === 'E' && notaSeleccionada !== null) {
+      eliminarNota(notaSeleccionada.id);
+      setNotaSeleccionada(null);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleEliminarNota);
+    return () => {
+      window.removeEventListener('keydown', handleEliminarNota);
+    };
+  }, [notaSeleccionada]);
 
   return (
     <div>
@@ -24,8 +38,9 @@ function App() {
       <div className='corcho'>
         {notas.map((nota) => (
           <div
-            onClick={() => setNotaSeleccionada(!notaSeleccionada)}
-            className={notaSeleccionada ? 'nota-selected' : 'nota'}>
+            key={nota.id}
+            onClick={() => setNotaSeleccionada(nota.id === notaSeleccionada?.id ? null : nota)}
+            className={nota.id === notaSeleccionada?.id ? 'nota-selected' : 'nota'}>
             <div className='pin' />
             <p>{nota.contenido}</p>
           </div>
@@ -34,10 +49,7 @@ function App() {
 
       <div className='agregar-nota'>
         <textarea value={notaTexto} onChange={(e) => setNotaTexto(e.target.value)} />
-        <button onClick={handleAddNota}>
-          Agregar Nota
-          {/* {notaSeleccionada !== null ? 'Guardar Cambios' : 'Agregar Nota'} */}
-        </button>
+        <button onClick={handleAddNota}>Agregar Nota</button>
       </div>
     </div>
   );
