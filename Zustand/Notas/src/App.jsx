@@ -11,15 +11,23 @@ function App() {
 
   const handleAddNota = () => {
     if (notaTexto !== '') {
-      addNota({ id: Date.now(), contenido: notaTexto });
-      setNotaTexto('');
+      // addNota({ id: Date.now(), contenido: notaTexto });
+
+      if (notaSeleccionada !== null) {
+        editarNota({ id: notaSeleccionada, contenido: notaTexto });
+        setNotaSeleccionada(null);
+      } else {
+        addNota(notaTexto);
+      }
+
+      setNotaTexto(''); // Vacía el cuadro de texto
     } else {
       alert('Introduce una nota');
     }
   };
 
   const handleEliminarNota = (e) => {
-    if (e.key === 'E' && notaSeleccionada !== null) {
+    if ((e.ctrlKey && e.key === 'e') || (e.ctrlKey && e.key === 'E' && notaSeleccionada !== null)) {
       eliminarNota(notaSeleccionada.id);
       setNotaSeleccionada(null);
     }
@@ -48,11 +56,8 @@ function App() {
       </div>
 
       <div className='agregar-nota'>
-        <textarea value={notaTexto} onChange={(e) => setNotaTexto(e.target.value)} />
-        <button onClick={handleAddNota}>
-          {/* Agregar Nota */}
-          {notaSeleccionada !== null ? 'Guardar Cambios' : 'Agregar Nota'}
-        </button>
+        <textarea value={notaTexto} onChange={(e) => setNotaTexto(e.target.value)} placeholder='Escribe tu nota' />
+        <button onClick={handleAddNota}>{notaSeleccionada !== null ? 'Guardar Cambios' : 'Agregar Nota'}</button>
       </div>
     </div>
   );
