@@ -18,14 +18,8 @@ export const notasStore = create((set) => ({
     set((estado) => ({ notas: estado.notas.filter((nota) => nota.id !== id) }));
   },
 
-  editarNota: (id) => {
-    set((estado) => {
-      // notas: estado.notas.map((nota) => {
-      //   nota.id === id ? { ...estado.notas, contenido: contenido } : nota;
-      // }),
-      // PENDIENTE: FALTA ESTA FUNCIÓN
-      const notaAEditar = estado.notas.find((nota) => nota.id === id);
-      console.log(notaAEditar);
-    });
-  },
+  editarNota: (id, contenido) =>
+    set((estado) => ({
+      notas: estado.notas.map((nota) => (nota.id === id ? { ...nota, contenido } : nota)),
+    })),
 }));
