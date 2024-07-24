@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'e' && notaSeleccionada !== null) {
+      if ((e.ctrlKey && e.key === 'e') || (e.ctrlKey && e.key === 'E' && notaSeleccionada !== null)) {
         handleRemoveNota(notaSeleccionada);
       }
     };
