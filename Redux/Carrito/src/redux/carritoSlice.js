@@ -24,13 +24,12 @@ const carritoSlice = createSlice({
           enElCarrito.cantidad -= 1;
         } else {
           return state.filter((item) => item.nombre !== instrumento.nombre);
-        }
+        } 
       }
     },
-
-    precioTotal: (state, action) => {
-      console.log('Calcular precio total');
-    },
+    precioTotal: (state) => {
+      state.total = state.items.reduce((acumulador, item) => acumulador + item.precio * item.cantidad, 0);
+    }
   },
 });
 
