@@ -9,20 +9,6 @@ function App() {
 
   const { notas, addNota, eliminarNota, editarNota } = notasStore();
 
-  useEffect(() => {
-    const handleEliminarNota = (e) => {
-      if ((e.ctrlKey && e.key === 'e') || (e.ctrlKey && e.key === 'E' && notaSeleccionada !== null)) {
-        eliminarNota(notaSeleccionada.id);
-        setNotaSeleccionada(null);
-      }
-    };
-
-    window.addEventListener('keydown', handleEliminarNota);
-    return () => {
-      window.removeEventListener('keydown', handleEliminarNota);
-    };
-  }, [notaSeleccionada]);
-
   const handleAddNota = () => {
     if (notaTexto !== '') {
       if (notaSeleccionada !== null) {
@@ -42,6 +28,25 @@ function App() {
     setNotaTexto(nota.contenido);
   };
 
+  const handleRemoveNota = (notaId) => {
+    eliminarNota(notaId);
+    setNotaSeleccionada(null);
+    setNotaTexto('');
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey && e.key === 'e') || (e.ctrlKey && e.key === 'E' && notaSeleccionada !== null)) {
+        handleRemoveNota(notaSeleccionada);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [notaSeleccionada]);
+
   return (
     <div>
       <h1>Gestor de Notas</h1>
@@ -49,8 +54,8 @@ function App() {
         {notas.map((nota) => (
           <div
             key={nota.id}
-            onClick={() => handleSelectNota(nota)}
-            className={notaSeleccionada === nota.id ? 'nota-selected' : 'nota'}>
+            className={notaSeleccionada === nota.id ? 'nota-selected' : 'nota'}
+            onClick={() => handleSelectNota(nota)}>
             <div className='pin' />
             <p>{nota.contenido}</p>
           </div>
