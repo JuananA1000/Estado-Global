@@ -6,7 +6,7 @@ import plato from '../img/plato.jpg'
 const instrumentos = [
   {
     nombre: 'Wincent 5A Hickory',
-    precio: 12.4,
+    precio: 12.40,
     img: baquetas,
     cantidad: 1,
   },
