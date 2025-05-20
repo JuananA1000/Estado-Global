@@ -41,7 +41,7 @@ function App() {
           width={40}
           id='carrito-icon'
         />
-        <Cantidad>{totalProductos}</Cantidad>
+        {totalProductos > 0 ? <Cantidad>{totalProductos}</Cantidad> : ''}
         <div>
           {mostrarCarrito ? (
             <div className='carrito'>
