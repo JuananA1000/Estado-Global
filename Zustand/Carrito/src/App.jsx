@@ -5,6 +5,8 @@ import instrumentos from './data/instrumentosData.js';
 import carritoIcon from './img/carrito.svg';
 import garbageIcon from './img/garbage.svg';
 
+import { carritoStore } from './zustand/carritoStore';
+
 import Cantidad from './components/Cantidad.jsx';
 
 import './App.css';
@@ -12,6 +14,13 @@ import './App.css';
 function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const [totalProductos, setTotalProductos] = useState(0);
+
+  const { carrito, addInstrumento } = carritoStore();
+
+  const handleAddInstrumento = (instrumento) => {
+    addInstrumento(instrumento);
+    setTotalProductos(totalProductos + instrumento.cantidad);
+  };
 
   return (
     <div>
@@ -28,27 +37,25 @@ function App() {
         <div>
           {mostrarCarrito ? (
             <div className='carrito'>
-              <article>
-                <div>
-                  <p> xcantidad</p>
-                  {/* <img src={item.img} alt={item.nombre} width={50} /> */}
-                  <span>nombre</span>
-                  <span>precio €</span>
-                  <img
-                    id='eliminar-producto'
-                    src={garbageIcon}
-                    onClick={() => {
-                      setTotalProductos(totalProductos - 1);
-                    }}
-                    alt='papelera'
-                    width={25}
-                  />
-                </div>
-              </article>
-
-              <div>
-                <b>Total:</b> 000€
-              </div>
+              {carrito.items.map((item, index) => (
+                <article key={index}>
+                  <div>
+                    <p> {item.cantidad} </p>
+                    <img src={item.img} alt={item.nombre} width={50} />
+                    <span>{item.nombre}</span>
+                    <span>{item.precio} €</span>
+                    <img
+                      id='eliminar-producto'
+                      src={garbageIcon}
+                      onClick={() => {
+                        setTotalProductos(totalProductos - 1);
+                      }}
+                      alt='papelera'
+                      width={25}
+                    />
+                  </div>
+                </article>
+              ))}
             </div>
           ) : (
             ''
@@ -62,12 +69,7 @@ function App() {
             <img src={instrumento.img} alt={instrumento.nombre} className='item-img' />
             <p>{instrumento.nombre}</p>
             <p>{instrumento.precio} €</p>
-            <button
-              onClick={() => {
-                setTotalProductos(totalProductos + 1);
-              }}>
-              Añadir
-            </button>
+            <button onClick={() => handleAddInstrumento(instrumento)}>Añadir</button>
           </div>
         ))}
       </div>
