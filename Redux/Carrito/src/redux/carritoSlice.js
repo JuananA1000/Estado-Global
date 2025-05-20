@@ -5,11 +5,6 @@ const carritoSlice = createSlice({
 
   initialState: {
     items: [],
-
-    /* 
-      IDEA: hemos eliminado la funcion precioTotal. En su lugar hemos convertido el initialState en un objeto que
-      refleja también el precio, el cual varía según los instrumentos dentro del carrito.
-    */
     total: 0,
   },
 
