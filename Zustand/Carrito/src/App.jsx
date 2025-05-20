@@ -62,6 +62,7 @@ function App() {
                   </div>
                 </article>
               ))}
+              <p>Total: {carrito.total} €</p>
             </div>
           ) : (
             ''
