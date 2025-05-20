@@ -15,11 +15,19 @@ function App() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const [totalProductos, setTotalProductos] = useState(0);
 
-  const { carrito, addInstrumento } = carritoStore();
+  const { carrito, addInstrumento, removeInstrumento } = carritoStore();
 
   const handleAddInstrumento = (instrumento) => {
     addInstrumento(instrumento);
     setTotalProductos(totalProductos + instrumento.cantidad);
+  };
+
+  const handleRemoveInstrumento = (instrumento) => {
+    const enElCarrito = carrito.items.find((i) => i.nombre === instrumento.nombre);
+    if (enElCarrito) {
+      removeInstrumento(instrumento);
+      setTotalProductos(totalProductos - 1);
+    }
   };
 
   return (
@@ -47,9 +55,7 @@ function App() {
                     <img
                       id='eliminar-producto'
                       src={garbageIcon}
-                      onClick={() => {
-                        setTotalProductos(totalProductos - 1);
-                      }}
+                      onClick={() => handleRemoveInstrumento(item)}
                       alt='papelera'
                       width={25}
                     />

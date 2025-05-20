@@ -29,7 +29,26 @@ export const carritoStore = create((set) => ({
       }
     }),
 
-  eliminarInstrumento: () => {
-    // code
-  },
+  removeInstrumento: (instrumento) =>
+    set((estado) => {
+      const enElCarrito = estado.carrito.items.find((i) => i.nombre === instrumento.nombre);
+
+      if (enElCarrito) {
+        return {
+          carrito: {
+            items: estado.carrito.items.map((item) =>
+              item.nombre === instrumento.nombre ? { ...item, cantidad: item.cantidad - 1 } : item
+            ),
+            total: estado.carrito.total - instrumento.precio,
+          },
+        };
+      } else {
+        return {
+          carrito: {
+            items: estado.carrito.items.filter((item) => item.nombre !== instrumento.nombre),
+            total: estado.carrito.total - instrumento.precio,
+          },
+        };
+      }
+    }),
 }));
