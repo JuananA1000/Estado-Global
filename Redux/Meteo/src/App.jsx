@@ -1,7 +1,10 @@
 import useFetch from './hooks/useFetch';
 
-import './App.css';
+import { actualizarUbicacion, limpiarUbicacion } from './redux/locationSlice.js';
+
 import wind from './assets/wind.png';
+
+import './App.css';
 
 function App() {
   const { data, loading, error } = useFetch(
