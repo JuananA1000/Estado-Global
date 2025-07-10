@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Utilizamos createAsyncThunk de Redux Toolkit para  acciones asíncronas
-const fetchClima = createAsyncThunk('clima/fetchClima', async ({ latitud, longitud }) => {
+export const fetchClima = createAsyncThunk('clima/fetchClima', async ({ latitud, longitud }) => {
   const response = await axios.get(
     `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&current_weather=true`
   );

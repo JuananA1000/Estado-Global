@@ -1,41 +1,46 @@
 import useFetch from './hooks/useFetch';
-
-import { actualizarUbicacion, limpiarUbicacion } from './redux/ubicacionSlice.js';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actualizarUbicacion } from './redux/ubicacionSlice.js';
+import { fetchClima } from './redux/climaSlice.js';
 
 import wind from './assets/wind.png';
 
 import './App.css';
 
 function App() {
-  const { data, loading, error } = useFetch(
-    'https://api.open-meteo.com/v1/forecast?latitude=48.8566&longitude=2.3522&hourly=temperature_2m&current_weather=true'
-  );
+  const dispatch = useDispatch();
+  const weatherData = useSelector((state) => state.clima.data);
+  const status = useSelector((state) => state.clima.status);
 
-  console.log(data);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+
+      dispatch(actualizarUbicacion(coords));
+      dispatch(fetchClima(coords));
+    });
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Meteo</h1>
 
       <div className='container'>
-        {loading && <p>Cargando...</p>}
-        {error && <p>Error al obtener los datos</p>}
-        {data && (
-          <div>
-            <div className='search-container'>
-              <input type='text' placeholder='Buscar ciudad...' className='search-input' />
-              <button onClick={() => console.log('Buscar ciudad')} className='search-button'>
-                Buscar
-              </button>
-            </div>
-
-            <img src={wind} alt='Weather Icon' width={100} />
-
-            <h2>El tiempo en nombreCiudad</h2>
-            <p>Temperatura: {data.current_weather.temperature}°C</p>
-            <p>Velocidad del Viento: {data.current_weather.windspeed} km/h</p>
+        <div>
+          <div className='search-container'>
+            <input type='text' placeholder='Buscar ciudad...' className='search-input' />
+            <button onClick={() => console.log('Buscar ciudad')} className='search-button'>
+              Buscar
+            </button>
           </div>
-        )}
+
+          <img src={wind} alt='Weather Icon' width={100} />
+
+          <h2>El tiempo en nombreCiudad</h2>
+          <p>Temperatura: {weatherData?.temperature}°C</p>
+          <p>Velocidad del Viento: {weatherData?.windspeed} km/h</p>
+        </div>
       </div>
     </div>
   );
