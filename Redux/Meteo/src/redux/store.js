@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import meteoSlice from './meteoSlice';
-import locationSlice from './locationSlice';
+import climaSlice from './climaSlice';
+import ubicacionSlice from './ubicacionSlice';
 
 export const store = configureStore({
   reducer: {
-    location: locationSlice,
-    meteo: meteoSlice,
+    ubicacion: ubicacionSlice,
+    clima: climaSlice,
   },
 });

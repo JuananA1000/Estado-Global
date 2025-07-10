@@ -1,6 +1,6 @@
 import useFetch from './hooks/useFetch';
 
-import { actualizarUbicacion, limpiarUbicacion } from './redux/locationSlice.js';
+import { actualizarUbicacion, limpiarUbicacion } from './redux/ubicacionSlice.js';
 
 import wind from './assets/wind.png';
 

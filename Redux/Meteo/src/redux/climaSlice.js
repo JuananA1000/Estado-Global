@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const meteoSlice = createSlice({
-  name: 'meteo',
+const climaSlice = createSlice({
+  name: 'clima',
   
   initialState: {
     data: null,
@@ -15,5 +15,5 @@ const meteoSlice = createSlice({
   },
 });
 
-export const {  } = meteoSlice.actions;
-export default meteoSlice.reducer;
+export const {  } = climaSlice.actions;
+export default climaSlice.reducer;
