@@ -1,20 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from './redux/climaSlice';
-import { updateLocation } from './redux/ubicacionSlice';
+import { fetchLocation } from './redux/ubicacionSlice';
 import weatherData from './data/weatherData';
 
 import './App.css';
 
 function App() {
+  const [searchCity, setsearchCity] = useState('');
+
   const dispatch = useDispatch();
   const location = useSelector((state) => state.ubicacion);
   const weather = useSelector((state) => state.clima);
 
   const buscarCiudad = () => {
-    dispatch(updateLocation({ city: 'Madrid', latitude: 40.4168, longitude: -3.7038 }));
-    // { city: 'Oslo', latitude: 59.9139, longitude: 10.7522 }
+    dispatch(fetchLocation(searchCity));
   };
 
   useEffect(() => {
