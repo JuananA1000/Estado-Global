@@ -27,16 +27,18 @@ function App() {
     <>
       <h1>Meteo</h1>
 
-      <input type='text' placeholder='Buscar Ciudad...' />
-      <button onClick={buscarCiudad}>Buscar</button>
-      <div className='card'>
-        <h2>Nombre Ciudad</h2>
-        <img
-          src={weatherData.find((w) => w.weathercode.includes(weather.data?.weathercode))?.icono}
-          alt='Weather Icon'
-          width={50}
-        />
-        <h3> {weather.data?.temperature}°C</h3>
+      <div className='container'>
+        <input type='text' placeholder='Buscar Ciudad...' />
+        <button onClick={buscarCiudad}>Buscar</button>
+        <div className='card'>
+          <h2>Nombre Ciudad</h2>
+          <img
+            src={weatherData.find((w) => w.weathercode.includes(weather.data?.weathercode))?.icono}
+            alt='Weather Icon'
+            width={50}
+          />
+          <h3> {weather.data?.temperature}°C</h3>
+        </div>
       </div>
     </>
   );
