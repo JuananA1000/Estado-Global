@@ -6,19 +6,20 @@ export const fetchWeather = createAsyncThunk('clima/fetchWeather', async ({ lati
   );
   const data = await response.json();
 
-  console.log('Weather data fetched:', data);
-
   return data.current_weather;
 });
 
 const climaSlice = createSlice({
   name: 'clima',
+
   initialState: {
     data: null,
     status: 'idle',
     error: null,
   },
+
   reducers: {},
+  
   extraReducers: (builder) => {
     builder
       .addCase(fetchWeather.pending, (state) => {

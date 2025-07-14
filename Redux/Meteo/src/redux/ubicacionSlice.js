@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const ubicacionSlice = createSlice({
-  name: 'clima',
+  name: 'ubicacion',
   initialState: {
     city: '',
     latitude: null,
