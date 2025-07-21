@@ -1,4 +1,5 @@
-import {createAsyncThunk,  createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useOptimistic } from 'react';
 
 export const fetchLocation = createAsyncThunk('ubicacion/fetchLocation', async (city) => {
   const response = await fetch(
@@ -16,9 +17,14 @@ const ubicacionSlice = createSlice({
     latitude: null,
     longitude: null,
   },
-  
+
   reducers: {
-    
+    // PENDIENTE: Borrar este reducer cuando nos conectemos a nominatim
+    updateLocation: (state, action) => {
+      state.city = action.payload.city;
+      state.latitude = action.payload.latitude;
+      state.longitude = action.payload.longitude;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -39,3 +45,4 @@ const ubicacionSlice = createSlice({
 });
 
 export default ubicacionSlice.reducer;
+export const { updateLocation } = ubicacionSlice.actions;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from './redux/climaSlice';
-import { fetchLocation } from './redux/ubicacionSlice';
+import { fetchLocation, updateLocation } from './redux/ubicacionSlice';
 import weatherData from './data/weatherData';
 
 import './App.css';
@@ -16,6 +16,7 @@ function App() {
 
   const buscarCiudad = () => {
     dispatch(fetchLocation(searchCity));
+    dispatch(updateLocation({ city: 'Madrid', latitude: 40.4168, longitude: -3.7038 })); // PENDIENTE: Borrar esta línea cuando se conecte a Nominatim
   };
 
   useEffect(() => {
