@@ -1,33 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// 🔍 Buscar coordenadas por nombre
-export const fetchLocationByName = createAsyncThunk(
-  'location/fetchByName',
-  async (placeName) => {
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(placeName)}`, {
-      headers: {
-        'User-Agent': 'my-location-app/1.0 (example@email.com)',
-        'Accept-Language': 'es',
-      },
-    });
-    const data = await response.json();
-    return data[0]; // Solo retornamos el primer resultado
-  }
-);
-
-// 📍 Buscar dirección por coordenadas
-export const fetchLocationByCoords = createAsyncThunk(
-  'location/fetchByCoords',
-  async ({ lat, lon }) => {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, {
-      headers: {
-        'User-Agent': 'my-location-app/1.0 (example@email.com)',
-      },
-    });
-    const data = await response.json();
-    return data;
-  }
-);
+export const fetchUbicacion = createAsyncThunk('location/fetchByName', async (nomCiudad) => {
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(nomCiudad)}`
+  );
+  const data = await response.json();
+  return data[0];
+});
 
 const ubicacionSlice = createSlice({
   name: 'ubicacion',
@@ -36,31 +15,20 @@ const ubicacionSlice = createSlice({
     status: 'idle',
     error: null,
   },
+
   reducers: {},
+
+  // Los reducers se encargan de manejar las acciones asíncronas que se definen con createAsyncThunk.
   extraReducers: (builder) => {
     builder
-      // fetchLocationByName
-      .addCase(fetchLocationByName.pending, (state) => {
+      .addCase(fetchUbicacion.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchLocationByName.fulfilled, (state, action) => {
+      .addCase(fetchUbicacion.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
       })
-      .addCase(fetchLocationByName.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
-
-      // fetchLocationByCoords
-      .addCase(fetchLocationByCoords.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchLocationByCoords.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.data = action.payload;
-      })
-      .addCase(fetchLocationByCoords.rejected, (state, action) => {
+      .addCase(fetchUbicacion.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
