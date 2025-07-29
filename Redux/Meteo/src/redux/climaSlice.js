@@ -19,7 +19,8 @@ const climaSlice = createSlice({
   },
 
   reducers: {},
-  
+
+  // Los extraReducers permiten manejar las acciones asíncronas creadas con createAsyncThunk.
   extraReducers: (builder) => {
     builder
       .addCase(fetchWeather.pending, (state) => {

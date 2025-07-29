@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from './redux/climaSlice';
 import { fetchUbicacion } from './redux/ubicacionSlice';
+
 import weatherData from './data/weatherData';
 
 import './App.css';
@@ -11,8 +12,9 @@ function App() {
   const [ciudad, setCiudad] = useState('');
 
   const dispatch = useDispatch();
-  const location = useSelector((state) => state.ubicacion);
-  const weather = useSelector((state) => state.clima);
+
+  const ubicacion = useSelector((state) => state.ubicacion);
+  const clima = useSelector((state) => state.clima);
 
   const buscarCiudad = () => {
     dispatch(fetchUbicacion(ciudad));
@@ -20,14 +22,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (location.data) {
-      dispatch(fetchWeather({ latitude: location.data.lat, longitude: location.data.lon }));
+    if (ubicacion.data) {
+      dispatch(fetchWeather({ latitude: ubicacion.data.lat, longitude: ubicacion.data.lon }));
     }
-  }, [location, dispatch]);
+  }, [ubicacion, dispatch]);
 
   useEffect(() => {
-    console.log('LOC object:', location);
-  }, [location]);
+    console.log('LOC object:', ubicacion);
+  }, [ubicacion]);
 
   return (
     <>
@@ -36,15 +38,22 @@ function App() {
       <div className='container'>
         <input type='text' value={ciudad} onChange={(e) => setCiudad(e.target.value)} placeholder='Buscar Ciudad...' />
         <button onClick={buscarCiudad}>Buscar</button>
-        <div className='card'>
-          <h2>{location.data?.display_name || 'Nombre Ciudad'}</h2>
-          <img
-            src={weatherData.find((w) => w.weathercode.includes(weather.data?.weathercode))?.icono}
-            alt='Weather Icon'
-            width={50}
-          />
-          <h3> {weather.data?.temperature}°C</h3>
-        </div>
+
+        {ubicacion.status === 'loading' && <p>Cargando ubicación...</p>}
+        {ubicacion.status === 'failed' && <p>Error al cargar ubicación: {ubicacion.error}</p>}
+        {clima.status === 'loading' && <p>Cargando clima...</p>}
+        {clima.status === 'failed' && <p>Error al cargar clima: {clima.error}</p>}
+        {ubicacion.status === 'succeeded' && clima.status === 'succeeded' && (
+          <div className='card'>
+            <h2>{ubicacion.data?.name}</h2>
+            <img
+              src={weatherData.find((w) => w.weathercode.includes(clima.data?.weathercode))?.icono}
+              alt='Weather Icon'
+              width={50}
+            />
+            <h3>{clima.data?.temperature}°C</h3>
+          </div>
+        )}
       </div>
     </>
   );

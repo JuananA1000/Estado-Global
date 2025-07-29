@@ -18,7 +18,6 @@ const ubicacionSlice = createSlice({
 
   reducers: {},
 
-  // Los reducers se encargan de manejar las acciones asíncronas que se definen con createAsyncThunk.
   extraReducers: (builder) => {
     builder
       .addCase(fetchUbicacion.pending, (state) => {
