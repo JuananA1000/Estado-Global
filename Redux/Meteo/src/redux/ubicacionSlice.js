@@ -1,43 +1,66 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useOptimistic } from 'react';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchLocation = createAsyncThunk('ubicacion/fetchLocation', async (city) => {
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityInput)}`
-  );
-  const data = await response.json();
+// 🔍 Buscar coordenadas por nombre
+export const fetchLocationByName = createAsyncThunk(
+  'location/fetchByName',
+  async (placeName) => {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(placeName)}`, {
+      headers: {
+        'User-Agent': 'my-location-app/1.0 (example@email.com)',
+        'Accept-Language': 'es',
+      },
+    });
+    const data = await response.json();
+    return data[0]; // Solo retornamos el primer resultado
+  }
+);
 
-  return data.display_name;
-});
+// 📍 Buscar dirección por coordenadas
+export const fetchLocationByCoords = createAsyncThunk(
+  'location/fetchByCoords',
+  async ({ lat, lon }) => {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, {
+      headers: {
+        'User-Agent': 'my-location-app/1.0 (example@email.com)',
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+);
 
 const ubicacionSlice = createSlice({
   name: 'ubicacion',
   initialState: {
-    city: '',
-    latitude: null,
-    longitude: null,
+    data: null,
+    status: 'idle',
+    error: null,
   },
-
-  reducers: {
-    // PENDIENTE: Borrar este reducer cuando nos conectemos a nominatim
-    updateLocation: (state, action) => {
-      state.city = action.payload.city;
-      state.latitude = action.payload.latitude;
-      state.longitude = action.payload.longitude;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLocation.pending, (state) => {
+      // fetchLocationByName
+      .addCase(fetchLocationByName.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchLocation.fulfilled, (state, action) => {
+      .addCase(fetchLocationByName.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.city = action.payload.city;
-        state.latitude = action.payload.latitude;
-        state.longitude = action.payload.longitude;
+        state.data = action.payload;
       })
-      .addCase(fetchLocation.rejected, (state, action) => {
+      .addCase(fetchLocationByName.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      // fetchLocationByCoords
+      .addCase(fetchLocationByCoords.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchLocationByCoords.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(fetchLocationByCoords.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
@@ -45,4 +68,3 @@ const ubicacionSlice = createSlice({
 });
 
 export default ubicacionSlice.reducer;
-export const { updateLocation } = ubicacionSlice.actions;

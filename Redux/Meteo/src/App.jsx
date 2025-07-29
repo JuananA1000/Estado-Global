@@ -2,21 +2,23 @@ import { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeather } from './redux/climaSlice';
-import { fetchLocation, updateLocation } from './redux/ubicacionSlice';
+import { fetchLocationByName, fetchLocationByCoords } from './redux/ubicacionSlice';
 import weatherData from './data/weatherData';
 
 import './App.css';
 
 function App() {
-  const [searchCity, setsearchCity] = useState('');
+  const [place, setPlace] = useState('');
 
   const dispatch = useDispatch();
   const location = useSelector((state) => state.ubicacion);
   const weather = useSelector((state) => state.clima);
 
   const buscarCiudad = () => {
-    dispatch(fetchLocation(searchCity));
-    dispatch(updateLocation({ city: 'Madrid', latitude: 40.4168, longitude: -3.7038 })); // PENDIENTE: Borrar esta línea cuando se conecte a Nominatim
+    // dispatch(fetchLocation(searchCity));
+    // dispatch(updateLocation({ city: 'Madrid', latitude: 40.4168, longitude: -3.7038 })); // PENDIENTE: Borrar esta línea cuando se conecte a Nominatim
+    dispatch(fetchLocationByName(place));
+    setPlace('');
   };
 
   useEffect(() => {
@@ -25,15 +27,19 @@ function App() {
     }
   }, [location, dispatch]);
 
+  useEffect(() => {
+    console.log('LOC object:', location);
+  }, [location]);
+
   return (
     <>
       <h1>Meteo</h1>
 
       <div className='container'>
-        <input type='text' placeholder='Buscar Ciudad...' />
+        <input type='text' value={place} onChange={(e) => setPlace(e.target.value)} placeholder='Buscar Ciudad...' />
         <button onClick={buscarCiudad}>Buscar</button>
         <div className='card'>
-          <h2>Nombre Ciudad</h2>
+          <h2>{location.data?.display_name || 'Nombre Ciudad'}</h2>
           <img
             src={weatherData.find((w) => w.weathercode.includes(weather.data?.weathercode))?.icono}
             alt='Weather Icon'
