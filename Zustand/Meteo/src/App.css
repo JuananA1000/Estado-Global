@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+.container {
+  background: linear-gradient(135deg, #87ceeb 0%, #b3e0ff 100%);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 5px 5px 12px -3px rgba(0, 0, 0, 0.75);
+}
