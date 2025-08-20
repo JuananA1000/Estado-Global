@@ -1,8 +1,13 @@
 import sun from './assets/0,1.png';
 
+import { useEffect } from 'react';
+import climaStore from './zustand/climaStore';
+
 import './App.css';
 
 function App() {
+  
+
   return (
     <>
       <h1>Meteo</h1>
