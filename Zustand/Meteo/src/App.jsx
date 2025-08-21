@@ -1,24 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import climaStore from './zustand/climaStore';
+import ubicacionStore from './zustand/ubicacionStore';
 
 import weatherData from './data/weatherData';
 
 import './App.css';
 
 function App() {
-  const { fetchClima, data, loading, error } = climaStore();
+  const [ciudad, setCiudad] = useState('');
+
+  const { fetchClima, data: climaData, loading, error } = climaStore();
+  const { fetchUbicacion, ubicacion } = ubicacionStore();
 
   const buscarCiudad = () => {
-    const latitude = 40.4168;
-    const longitude = -3.7038;
-    fetchClima(latitude, longitude);
+    // const latitude = 40.4168;
+    // const longitude = -3.7038;
+    // fetchClima(latitude, longitude);
+    fetchUbicacion(ciudad);
+    setCiudad('');
   };
 
   useEffect(() => {
-    if (data) {
-      console.log('Clima actualizado:', data);
+    if (climaData) {
+      console.log('Clima actualizado:', climaData);
     }
-  }, [data]);
+  }, [climaData]);
 
   return (
     <>
@@ -30,7 +36,7 @@ function App() {
 
         {loading && <p>Cargando clima...</p>}
         {error && <p>Error al cargar clima: {error}</p>}
-        {data && (
+        {climaData && (
           <div className='card'>
             <h2>nombreCiudad</h2>
             <img
