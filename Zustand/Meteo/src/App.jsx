@@ -6,7 +6,19 @@ import climaStore from './zustand/climaStore';
 import './App.css';
 
 function App() {
-  
+  const { fetchClima, data, loading, error } = climaStore();
+
+  const buscarCiudad = () => {
+    const latitude = 40.4168;
+    const longitude = -3.7038;
+    fetchClima(latitude, longitude);
+  };
+
+  useEffect(() => {
+    if (data) {
+      console.log('Clima actualizado:', data);
+    }
+  }, [data]);
 
   return (
     <>
@@ -14,7 +26,7 @@ function App() {
 
       <div className='container'>
         <input type='text' placeholder='Buscar Ciudad...' />
-        <button>Buscar</button>
+        <button onClick={buscarCiudad}>Buscar</button>
 
         <div className='card'>
           <h2>nombreCiudad</h2>
