@@ -1,7 +1,7 @@
-import sun from './assets/0,1.png';
-
 import { useEffect } from 'react';
 import climaStore from './zustand/climaStore';
+
+import weatherData from './data/weatherData';
 
 import './App.css';
 
@@ -28,12 +28,19 @@ function App() {
         <input type='text' placeholder='Buscar Ciudad...' />
         <button onClick={buscarCiudad}>Buscar</button>
 
-        <div className='card'>
-          <h2>nombreCiudad</h2>
-          <img src={sun} alt='Weather Icon' width={50} />
-
-          <h3>00°C</h3>
-        </div>
+        {loading && <p>Cargando clima...</p>}
+        {error && <p>Error al cargar clima: {error}</p>}
+        {data && (
+          <div className='card'>
+            <h2>nombreCiudad</h2>
+            <img
+              src={weatherData.find((w) => w.weathercode.includes(data?.weathercode))?.icono}
+              alt='Weather Icon'
+              width={50}
+            />
+            <h3>{data.temperature}°C</h3>
+          </div>
+        )}
       </div>
     </>
   );
