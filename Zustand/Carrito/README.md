@@ -9,4 +9,4 @@
   - Eliminar producto del carrito
   - Mostrar precio total de la compra.
 
-Un reducer gestionará el estado del carrito. Las acciones de agregar y eliminar actualizarían el array de productos, y la acción de mostrar precio modificaría el precio total de la compra.
+Se gestionará el estado del carrito. Las acciones de agregar y eliminar actualizarían el array de productos, y la acción de mostrar precio modificaría el precio total de la compra.
