@@ -6,6 +6,8 @@ import { fetchUbicacion } from './redux/ubicacionSlice';
 
 import weatherData from './data/weatherData';
 
+import Tooltip from './components/Tooltip';
+
 import './App.css';
 
 function App() {
@@ -46,11 +48,16 @@ function App() {
         {ubicacion.status === 'succeeded' && clima.status === 'succeeded' && (
           <div className='card'>
             <h2>{ubicacion.data?.name}</h2>
-            <img
-              src={weatherData.find((w) => w.weathercode.includes(clima.data?.weathercode))?.icono}
-              alt='Weather Icon'
-              width={50}
-            />
+
+            <Tooltip
+              text={weatherData.find((w) => w.weathercode.includes(clima.data?.weathercode))?.descripcion}
+              position='right'>
+              <img
+                src={weatherData.find((w) => w.weathercode.includes(clima.data?.weathercode))?.icono}
+                alt='Weather Icon'
+                width={50}
+              />
+            </Tooltip>
             <h3>{clima.data?.temperature}°C</h3>
           </div>
         )}
