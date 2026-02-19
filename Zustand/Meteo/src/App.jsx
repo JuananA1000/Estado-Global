@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 
-import weatherData from './data/weatherData';
+import { climaStore } from './zustand/climaStore';
 
 import './App.css';
 
 function App() {
   const [ciudad, setCiudad] = useState('');
 
+  const { clima, setDatosClima } = climaStore();
+
   const buscarCiudad = () => {
     console.log('Buscar ciudad no implementado');
   };
+
+  // useEffect(() => {
+  //   setDatosClima(40.4168, -3.7038); // Coordenadas de Madrid
+  // }, [setDatosClima]);
 
   return (
     <>
