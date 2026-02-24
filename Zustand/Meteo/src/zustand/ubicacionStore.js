@@ -1,23 +1,17 @@
 import { create } from 'zustand';
 
-const UBICACION_API_URL = 'https://nominatim.openstreetmap.org/search';
-
-export const ubicacionStore = create((set) => ({
-  ciudad: '',
-  lat: null,
-  lon: null,
-  loading: false,
+const ubicacionStore = create((set) => ({
+  data: null,
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 
-  setUbicacion: (ubicacion) => set({ ubicacion }),
-
-  obtenerUbicacion: async (nomCiudad) => {
-    if (!nomCiudad) return;
-
-    set({ loading: true, error: null });
-
+  fetchUbicacion: async (nomCiudad) => {
     try {
-      const response = await fetch(`${NOMINATIM_URL}?q=${nomCiudad}&format=json&limit=1`);
+      set({ status: 'loading', error: null });
+
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(nomCiudad)}`,
+      );
 
       if (!response.ok) {
         throw new Error('Error al obtener la ubicación');
@@ -25,17 +19,17 @@ export const ubicacionStore = create((set) => ({
 
       const data = await response.json();
 
-      if (data.length === 0) {
-        throw new Error('Ciudad no encontrada');
-      }
-
       set({
-        lat: data[0].lat,
-        lon: data[0].lon,
-        loading: false,
+        status: 'succeeded',
+        data: data[0] || null,
       });
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        status: 'failed',
+        error: error.message,
+      });
     }
   },
 }));
+
+export default ubicacionStore;
