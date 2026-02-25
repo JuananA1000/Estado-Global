@@ -28,7 +28,6 @@ const notasSlice = createSlice({
       // const notasDOM = state.filter((nota) => nota.id !== action.payload);
       // localStorage.setItem('notas', JSON.stringify(notasDOM));
       // return notasDOM;
-      console.log(state);
       return state.filter((nota) => nota.id !== action.payload);
     },
 

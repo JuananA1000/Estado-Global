@@ -29,10 +29,6 @@ function App() {
     }
   }, [ubicacion, dispatch]);
 
-  useEffect(() => {
-    console.log('LOC object:', ubicacion);
-  }, [ubicacion]);
-
   return (
     <>
       <h1>Meteo</h1>
