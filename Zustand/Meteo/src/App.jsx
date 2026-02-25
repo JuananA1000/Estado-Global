@@ -5,6 +5,8 @@ import climaStore from './zustand/climaStore';
 
 import weatherData from './data/weatherData';
 
+import Tooltip from './components/Tooltip';
+
 import './App.css';
 
 function App() {
@@ -35,15 +37,20 @@ function App() {
         {status === 'loading' && <p>Cargando ubicación...</p>}
         {status === 'failed' && <p>Error al cargar ubicación: {error}</p>}
         {clima?.temperature && (
-        <div className='card'>
-          <h2> {ubicacion?.name || 'Ciudad no encontrada'}</h2>
-          <img
-            src={weatherData.find((w) => w.weathercode.includes(clima?.weathercode))?.icono}
-            alt='Weather Icon'
-            width={50}
-          />
-          <h3> {clima?.temperature} °C</h3>
-        </div>
+          <div className='card'>
+            <h2> {ubicacion?.name || 'Ciudad no encontrada'}</h2>
+
+            <Tooltip
+              text={weatherData.find((w) => w.weathercode.includes(clima?.weathercode))?.descripcion}
+              position='right'>
+              <img
+                src={weatherData.find((w) => w.weathercode.includes(clima?.weathercode))?.icono}
+                alt='Weather Icon'
+                width={50}
+              />
+            </Tooltip>
+            <h3> {clima?.temperature} °C</h3>
+          </div>
         )}
       </div>
     </>
