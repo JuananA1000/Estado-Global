@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import ubicacionStore from './zustand/ubicacionStore';
+import climaStore from './zustand/climaStore';
 
 import './App.css';
 
@@ -8,14 +9,17 @@ function App() {
   const [ciudad, setCiudad] = useState('');
 
   const { data, status, error, fetchUbicacion } = ubicacionStore();
+  const { data: clima, fetchWeather } = climaStore();
 
   const buscarCiudad = () => {
     fetchUbicacion(ciudad);
-    setCiudad('');
+    // setCiudad('');
   };
 
   useEffect(() => {
-    console.log('Ciudad:', data);
+    if (data) {
+      fetchWeather({ latitude: data.lat, longitude: data.lon });
+    }
   }, [data]);
 
   // Coordenadas MAD: 40.4167, -3.7033
@@ -35,7 +39,7 @@ function App() {
             alt='Weather Icon'
             width={50}
           />
-          <h3> '00°C'</h3>
+          <h3> {clima?.temperature || '00°C'}</h3>
         </div>
       </div>
     </>
