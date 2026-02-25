@@ -10,7 +10,7 @@ import './App.css';
 function App() {
   const [ciudad, setCiudad] = useState('');
 
-  const { data, status, error, fetchUbicacion } = ubicacionStore();
+  const { data: ubicacion, status, error, fetchUbicacion } = ubicacionStore();
   const { data: clima, fetchWeather } = climaStore();
 
   const buscarCiudad = () => {
@@ -19,10 +19,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (data) {
-      fetchWeather({ latitude: data.lat, longitude: data.lon });
+    if (ubicacion) {
+      fetchWeather({ latitude: ubicacion.lat, longitude: ubicacion.lon });
     }
-  }, [data]);
+  }, [ubicacion]);
 
   return (
     <>
@@ -36,7 +36,7 @@ function App() {
         {status === 'failed' && <p>Error al cargar ubicación: {error}</p>}
         {clima?.temperature && (
         <div className='card'>
-          <h2> {data?.name || 'Ciudad no encontrada'}</h2>
+          <h2> {ubicacion?.name || 'Ciudad no encontrada'}</h2>
           <img
             src={weatherData.find((w) => w.weathercode.includes(clima?.weathercode))?.icono}
             alt='Weather Icon'
