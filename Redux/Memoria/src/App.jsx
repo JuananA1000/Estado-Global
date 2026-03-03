@@ -8,7 +8,11 @@ function App() {
   return (
     <>
       <h1>Juego de Memoria</h1>
-      <div className='card'>{/* Contenido */}</div>
+      <div className='card'>
+        <div className='tarjeta'></div>
+        
+        {/* Contenido */}
+        </div>
     </>
   );
 }
