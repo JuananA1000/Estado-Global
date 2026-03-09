@@ -21,6 +21,9 @@
 }
 
 .card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
   padding: 2em;
 }
 
@@ -28,14 +31,15 @@
   color: #888;
 }
 
-.tarjeta{
+.tarjeta {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100px;
   height: 100px;
-  background-color: #c5c5c5;
+  background-color: #5295bb;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }

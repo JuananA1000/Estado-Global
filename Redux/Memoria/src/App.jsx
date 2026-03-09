@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import imagesData from './data/imagesData';
 
 import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
+const imgRandom = [...imagesData, ...imagesData].sort(() => Math.random() - 0.5).map((img, i) => ({ ...img, key: i }));
 
+function App() {
   return (
     <>
       <h1>Juego de Memoria</h1>
       <div className='card'>
-        <div className='tarjeta'></div>
-        
-        {/* Contenido */}
-        </div>
+        {imgRandom.map(({ key, img, name }) => (
+          <div key={key} className='tarjeta'>
+            <img src={img} alt={name} width={80} />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
