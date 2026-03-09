@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const memoriaSlice = createSlice({
   name: 'memoria',
-  initialState: {
-    // Add your initial state here
-  },
+  initialState: [],
   reducers: {
-    // Add your reducers here
+    selectCarta: (state, action) => {},
+    compararCartas: (state, action) => {},
+    reiniciarJuego: (state, action) => {},
   },
 });
 
-export const {} = memoriaSlice.actions;
+export const { selectCarta, compararCartas, reiniciarJuego } = memoriaSlice.actions;
 export default memoriaSlice.reducer;
