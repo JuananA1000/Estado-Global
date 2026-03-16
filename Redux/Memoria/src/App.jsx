@@ -8,6 +8,7 @@ const imgRandom = [...imagesData, ...imagesData].sort(() => Math.random() - 0.5)
 
 function App() {
   const [start, setStart] = useState(false);
+  const [girarCarta, setGirarCarta] = useState(null);
 
   return (
     <>
@@ -17,8 +18,8 @@ function App() {
 
       <div className='card'>
         {imgRandom.map(({ key, img, name }) => (
-          <div key={key} className='tarjeta'>
-            {start && <img src={img} alt={name} width={80} />}
+          <div key={key} className='tarjeta' onClick={() => setGirarCarta(key)}>
+            {girarCarta === key && <img src={img} alt={name} width={80} />}
           </div>
         ))}
       </div>
