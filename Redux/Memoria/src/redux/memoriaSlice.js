@@ -31,7 +31,7 @@ const memoriaSlice = createSlice({
         state.movimientos += 1;
       } 
     },
-    
+
     compararCartas: (state) => {
       if (state.cartasSeleccionadas.length !== 2) return; // Solo se pueden comparar si hay exactamente dos cartas seleccionadas
 
@@ -46,6 +46,7 @@ const memoriaSlice = createSlice({
         });
       }
     },
+    
     reiniciarJuego: (state) => {
       state.cartasSeleccionadas = [];
       state.bloquearTablero = false;
