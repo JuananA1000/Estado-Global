@@ -10,7 +10,7 @@ import './App.css';
 const imgRandom = [...imagesData, ...imagesData].sort(() => Math.random() - 0.5).map((img, i) => ({ ...img, key: i }));
 
 function App() {
-  const [girarCarta, setGirarCarta] = useState(null);
+  const [cartasGiradas, setCartasGiradas] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ function App() {
   const seleccionarCarta = (carta) => {
     if (bloquearTablero) return;
     dispatch(selectCarta(carta));
-    setGirarCarta(carta.id);
+    setCartasGiradas([...cartasGiradas, carta.id]);
   };
 
   useEffect(() => {
@@ -32,6 +32,13 @@ function App() {
     }
   }, [cartasSeleccionadas, dispatch]);
 
+  // Cuando se limpian las cartas seleccionadas, también limpiamos las giradas
+  useEffect(() => {
+    if (cartasSeleccionadas.length === 0) {
+      setCartasGiradas([]);
+    }
+  }, [cartasSeleccionadas]);
+
   return (
     <>
       <h1>Juego de Memoria</h1>
@@ -41,7 +48,7 @@ function App() {
       <div className='card'>
         {imgRandom.map(({ key, img, name }) => (
           <div key={key} className='tarjeta' onClick={() => seleccionarCarta(  { id: key, valor: name })}>
-            {girarCarta === key && <img src={img} alt={name} width={80} />}
+            {cartasGiradas.includes(key) && <img src={img} alt={name} width={80} />}
           </div>
         ))}
       </div>

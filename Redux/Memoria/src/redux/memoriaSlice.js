@@ -45,6 +45,10 @@ const memoriaSlice = createSlice({
           return carta;
         });
       }
+
+      // Limpiar cartas seleccionadas y desbloquear tablero después de comparar
+      state.cartasSeleccionadas = [];
+      state.bloquearTablero = false;
     },
     
     reiniciarJuego: (state) => {
