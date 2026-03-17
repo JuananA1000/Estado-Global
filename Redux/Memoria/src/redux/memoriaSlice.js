@@ -4,14 +4,22 @@ const memoriaSlice = createSlice({
   name: 'memoria',
   initialState: {
     cartas: [
-      { id: 1, valor: 'mariscada', emparejada: false },
-      { id: 2, valor: 'montanalien', emparejada: false },
-      { id: 3, valor: 'oso_panda', emparejada: false },
-      { id: 4, valor: 'scary_movie', emparejada: false },
-      { id: 5, valor: 'serp_avion', emparejada: false },
-      { id: 6, valor: 'sharknado', emparejada: false },
-      { id: 7, valor: 'tambor_derr', emparejada: false },
-      { id: 8, valor: 'tortuga_ninja', emparejada: false },
+      { id: 1, valor: 'mariscada.png', emparejada: false },
+      { id: 1, valor: 'mariscada.png', emparejada: false },
+      { id: 2, valor: 'montaña_alien.png', emparejada: false },
+      { id: 2, valor: 'montaña_alien.png', emparejada: false },
+      { id: 3, valor: 'oso_panda.png', emparejada: false },
+      { id: 3, valor: 'oso_panda.png', emparejada: false },
+      { id: 4, valor: 'scary_movie.png', emparejada: false },
+      { id: 4, valor: 'scary_movie.png', emparejada: false },
+      { id: 5, valor: 'serpientes_en_el_avion.png', emparejada: false },
+      { id: 5, valor: 'serpientes_en_el_avion.png', emparejada: false },
+      { id: 6, valor: 'sharknado.png', emparejada: false },
+      { id: 6, valor: 'sharknado.png', emparejada: false },
+      { id: 7, valor: 'tambor_derretido.png', emparejada: false },
+      { id: 7, valor: 'tambor_derretido.png', emparejada: false },
+      { id: 8, valor: 'tortuga_ninja.png', emparejada: false },
+      { id: 8, valor: 'tortuga_ninja.png', emparejada: false },
     ],
 
     cartasSeleccionadas: [],
@@ -33,7 +41,7 @@ const memoriaSlice = createSlice({
     },
 
     compararCartas: (state) => {
-      if (state.cartasSeleccionadas.length !== 2) return; // Solo se pueden comparar si hay exactamente dos cartas seleccionadas
+      if (state.cartasSeleccionadas.length !== 2) return;
 
       const [carta1, carta2] = state.cartasSeleccionadas;
 
@@ -46,7 +54,6 @@ const memoriaSlice = createSlice({
         });
       }
 
-      // Limpiar cartas seleccionadas y desbloquear tablero después de comparar
       state.cartasSeleccionadas = [];
       state.bloquearTablero = false;
     },
