@@ -26,36 +26,22 @@ const memoriaSlice = createSlice({
     bloquearTablero: false, // Mientras se comparan las cartas, el tablero se bloquea
     movimientos: 0,
   },
+  
   reducers: {
     selectCarta: (state, action) => {
       const carta = action.payload;
+      console.log('carta', carta);
+      console.log('state', state);
 
-      if (state.cartasSeleccionadas.length < 2) {
-        state.cartasSeleccionadas.push(carta);
-      }
+      // si hay menos de 2 cartas seleccionadas, push. Que es push?
 
-      if (state.cartasSeleccionadas.length === 2) {
-        state.bloquearTablero = true;
-        state.movimientos += 1;
-      }
+      // si hay 2 cartas seleccionadas, bloquear el tablero y aumentar movimientos
     },
 
     compararCartas: (state) => {
-      if (state.cartasSeleccionadas.length !== 2) return;
-
-      const [carta1, carta2] = state.cartasSeleccionadas;
-
-      if (carta1.valor === carta2.valor) {
-        state.cartas = state.cartas.map((carta) => {
-          if (carta.id === carta1.id || carta.id === carta2.id) {
-            return { ...carta, emparejada: true };
-          }
-          return carta;
-        });
-      }
-
-      state.cartasSeleccionadas = [];
-      state.bloquearTablero = false;
+     // si hay 2 cartas seleccionadas, comparar. 
+     // Si son iguales, marcar como emparejadas. 
+     // Si no, desbloquear el tablero.
     },
 
     reiniciarJuego: (state) => {
