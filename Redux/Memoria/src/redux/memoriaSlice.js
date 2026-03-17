@@ -20,7 +20,7 @@ const memoriaSlice = createSlice({
       { id: 7, valor: 'tambor_derretido.png', emparejada: false },
       { id: 8, valor: 'tortuga_ninja.png', emparejada: false },
       { id: 8, valor: 'tortuga_ninja.png', emparejada: false },
-    ],
+    ].sort(() => Math.random() - 0.5),
 
     cartasSeleccionadas: [],
     bloquearTablero: false, // Mientras se comparan las cartas, el tablero se bloquea
@@ -37,7 +37,7 @@ const memoriaSlice = createSlice({
       if (state.cartasSeleccionadas.length === 2) {
         state.bloquearTablero = true;
         state.movimientos += 1;
-      } 
+      }
     },
 
     compararCartas: (state) => {
@@ -57,7 +57,7 @@ const memoriaSlice = createSlice({
       state.cartasSeleccionadas = [];
       state.bloquearTablero = false;
     },
-    
+
     reiniciarJuego: (state) => {
       state.cartasSeleccionadas = [];
       state.bloquearTablero = false;
