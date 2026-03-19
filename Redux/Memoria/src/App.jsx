@@ -9,6 +9,13 @@ function App() {
   const dispatch = useDispatch();
 
   const cartas = useSelector((state) => state.memoria.cartas);
+  const movimientos = useSelector((state) => state.memoria.movimientos);
+  const cartasSeleccionadas = useSelector((state) => state.memoria.cartasSeleccionadas);
+  const bloquearTablero = useSelector((state) => state.memoria.bloquearTablero);
+
+  useEffect(() => {
+    dispatch(compararCartas());
+  }, [cartasSeleccionadas, dispatch]);
 
   return (
     <>
@@ -18,11 +25,20 @@ function App() {
 
       <div className='card'>
         {cartas.map((carta) => (
-          <div key={carta.id} className='tarjeta' onClick={() => dispatch(selectCarta(carta))}>
+          <div
+            key={carta.uid}
+            className='tarjeta'
+            onClick={() => {
+              if (!bloquearTablero) {
+                dispatch(selectCarta(carta));
+              }
+            }}>
             <img src={carta.img} alt={`Carta ${carta.id}`} width={80} />
           </div>
         ))}
       </div>
+
+      <p>Movimientos: {movimientos}</p>
     </>
   );
 }
