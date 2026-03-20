@@ -15,13 +15,13 @@ function App() {
 
   useEffect(() => {
     dispatch(compararCartas());
-  }, [cartasSeleccionadas, dispatch]);
+  }, [dispatch, cartasSeleccionadas]);
 
   return (
     <>
       <h1>Juego de Memoria</h1>
 
-      <button onClick={() => console.log('reiniciar')}> 'Reiniciar' </button>
+      <button onClick={() => dispatch(reiniciarJuego())}>Reiniciar</button>
 
       <div className='card'>
         {cartas.map((carta) => (

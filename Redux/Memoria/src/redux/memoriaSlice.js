@@ -51,19 +51,23 @@ const memoriaSlice = createSlice({
         state.bloquearTablero = true;
         state.movimientos += 1;
       }
-      state.cartasSeleccionadas = []; // Limpiar las cartas seleccionadas después de comparar
     },
-
+    
     compararCartas: (state) => {
       // si hay 2 cartas seleccionadas, comparar.
       if (state.cartasSeleccionadas.length === 2) {
         if (state.cartasSeleccionadas[0].valor === state.cartasSeleccionadas[1].valor) {
+          // Si son iguales, marcar como emparejadas
+          state.cartasSeleccionadas[0].emparejada = true;
+          state.cartasSeleccionadas[1].emparejada = true;
+
           console.log('CartasSeleccionadas: ', state.cartasSeleccionadas[0].valor, state.cartasSeleccionadas[1].valor);
         }
+        // Desbloquear el tablero en ambos casos (iguales o diferentes)
+        state.bloquearTablero = false;
+        // Limpiar las cartas seleccionadas después de comparar
+        state.cartasSeleccionadas = [];
       }
-
-      // Si son iguales, marcar como emparejadas.
-      // Si no, desbloquear el tablero.
     },
 
     reiniciarJuego: (state) => {
