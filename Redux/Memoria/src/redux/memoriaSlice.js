@@ -52,7 +52,7 @@ const memoriaSlice = createSlice({
         state.movimientos += 1;
       }
     },
-    
+
     compararCartas: (state) => {
       // si hay 2 cartas seleccionadas, comparar.
       if (state.cartasSeleccionadas.length === 2) {
@@ -61,7 +61,7 @@ const memoriaSlice = createSlice({
           state.cartasSeleccionadas[0].emparejada = true;
           state.cartasSeleccionadas[1].emparejada = true;
 
-          console.log('CartasSeleccionadas: ', state.cartasSeleccionadas[0].valor, state.cartasSeleccionadas[1].valor);
+          console.log('Pareja encontrada: ', state.cartasSeleccionadas[0].valor, state.cartasSeleccionadas[1].valor);
         }
         // Desbloquear el tablero en ambos casos (iguales o diferentes)
         state.bloquearTablero = false;
