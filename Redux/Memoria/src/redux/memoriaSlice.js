@@ -38,18 +38,18 @@ const memoriaSlice = createSlice({
 
   reducers: {
     selectCarta: (state, action) => {
-      const carta = action.payload;
-      console.log('Carta: ', carta.valor);
+      const cartaSeleccionada = action.payload;
+      console.log('Carta: ', cartaSeleccionada.valor);
 
-      const cartaGirada = state.cartasSeleccionadas.find((c) => c.uid === carta.uid);
-      if (cartaGirada) {
-        cartaGirada.girada = true; // Si la carta ya está seleccionada, no hacer nada
-      }
+      const cartaIndex = state.cartas.findIndex((c) => c.uid === cartaSeleccionada.uid);
+      if (cartaIndex === -1) return;
 
-      // si hay menos de 2 cartas seleccionadas, push. Que es push?
-      if (state.cartasSeleccionadas.length < 2) {
-        state.cartasSeleccionadas.push(cartaGirada || { ...carta, girada: true }); // Si la carta no está seleccionada, agregarla al array de seleccionadas
-      }
+      // Si ya está girada o emparejada, no hacemos nada.
+      if (state.cartas[cartaIndex].girada || state.cartas[cartaIndex].emparejada) return;
+
+      // Girar carta en el tablero principal
+      state.cartas[cartaIndex].girada = true;
+      state.cartasSeleccionadas.push(state.cartas[cartaIndex]);
 
       // si hay 2 cartas seleccionadas, bloquear el tablero y aumentar movimientos
       if (state.cartasSeleccionadas.length === 2) {
@@ -61,17 +61,22 @@ const memoriaSlice = createSlice({
     compararCartas: (state) => {
       // si hay 2 cartas seleccionadas, comparar.
       if (state.cartasSeleccionadas.length === 2) {
-        if (state.cartasSeleccionadas[0].valor === state.cartasSeleccionadas[1].valor) {
-          // Si son iguales, marcar como emparejadas
-          state.cartasSeleccionadas[0].emparejada = true;
-          state.cartasSeleccionadas[1].emparejada = true;
+        const [cartaA, cartaB] = state.cartasSeleccionadas;
 
-          console.log('Pareja encontrada: ', state.cartasSeleccionadas[0].valor, state.cartasSeleccionadas[1].valor);
+        if (cartaA.valor === cartaB.valor) {
+          // Si son iguales, marcar como emparejadas y dejar giradas
+          const idxA = state.cartas.findIndex((c) => c.uid === cartaA.uid);
+          const idxB = state.cartas.findIndex((c) => c.uid === cartaB.uid);
+          if (idxA >= 0) state.cartas[idxA].emparejada = true;
+          if (idxB >= 0) state.cartas[idxB].emparejada = true;
         } else {
           // Si no son iguales, marcar como no giradas para que se oculten nuevamente
-          state.cartasSeleccionadas[0].girada = false;
-          state.cartasSeleccionadas[1].girada = false;
+          const idxA = state.cartas.findIndex((c) => c.uid === cartaA.uid);
+          const idxB = state.cartas.findIndex((c) => c.uid === cartaB.uid);
+          if (idxA >= 0) state.cartas[idxA].girada = false;
+          if (idxB >= 0) state.cartas[idxB].girada = false;
         }
+
         // Desbloquear el tablero en ambos casos (iguales o diferentes)
         state.bloquearTablero = false;
         // Limpiar las cartas seleccionadas después de comparar
@@ -80,6 +85,11 @@ const memoriaSlice = createSlice({
     },
 
     reiniciarJuego: (state) => {
+      state.cartas = state.cartas.map((carta) => ({
+        ...carta,
+        girada: false,
+        emparejada: false,
+      })).sort(() => Math.random() - 0.5);
       state.cartasSeleccionadas = [];
       state.bloquearTablero = false;
       state.movimientos = 0;

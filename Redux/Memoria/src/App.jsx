@@ -6,13 +6,13 @@ import { selectCarta, compararCartas, reiniciarJuego } from './redux/memoriaSlic
 import './App.css';
 
 function App() {
- 
   const dispatch = useDispatch();
 
   const cartas = useSelector((state) => state.memoria.cartas);
   const movimientos = useSelector((state) => state.memoria.movimientos);
   const cartasSeleccionadas = useSelector((state) => state.memoria.cartasSeleccionadas);
   const bloquearTablero = useSelector((state) => state.memoria.bloquearTablero);
+
 
   useEffect(() => {
     dispatch(compararCartas());
@@ -26,7 +26,6 @@ function App() {
 
       <div className='card'>
         {cartas.map((carta) => (
-          
           <div
             key={carta.uid}
             className='tarjeta'
@@ -35,15 +34,14 @@ function App() {
                 dispatch(selectCarta(carta));
               }
             }}>
-            <img src={carta.img} alt={`Carta ${carta.id}`} width={80} />
-          </div>
-        ))}
-
-          {/* {carta.girada ? (
+            {carta.girada  ? (
               <img src={carta.img} alt={`Carta ${carta.id}`} width={80} />
             ) : (
               <span>??</span>
-            )} */}
+            )}
+          </div>
+        ))}
+
       </div>
 
       <p>Movimientos: {movimientos}</p>
