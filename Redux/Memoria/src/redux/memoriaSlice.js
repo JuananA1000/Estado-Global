@@ -41,9 +41,14 @@ const memoriaSlice = createSlice({
       const carta = action.payload;
       console.log('Carta: ', carta.valor);
 
+      const cartaGirada = state.cartasSeleccionadas.find((c) => c.uid === carta.uid);
+      if (cartaGirada) {
+        cartaGirada.girada = true; // Si la carta ya está seleccionada, no hacer nada
+      }
+
       // si hay menos de 2 cartas seleccionadas, push. Que es push?
       if (state.cartasSeleccionadas.length < 2) {
-        state.cartasSeleccionadas.push(carta);
+        state.cartasSeleccionadas.push(cartaGirada || { ...carta, girada: true }); // Si la carta no está seleccionada, agregarla al array de seleccionadas
       }
 
       // si hay 2 cartas seleccionadas, bloquear el tablero y aumentar movimientos
@@ -62,6 +67,10 @@ const memoriaSlice = createSlice({
           state.cartasSeleccionadas[1].emparejada = true;
 
           console.log('Pareja encontrada: ', state.cartasSeleccionadas[0].valor, state.cartasSeleccionadas[1].valor);
+        } else {
+          // Si no son iguales, marcar como no giradas para que se oculten nuevamente
+          state.cartasSeleccionadas[0].girada = false;
+          state.cartasSeleccionadas[1].girada = false;
         }
         // Desbloquear el tablero en ambos casos (iguales o diferentes)
         state.bloquearTablero = false;
