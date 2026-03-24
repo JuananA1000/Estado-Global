@@ -26,10 +26,14 @@ function App() {
   }, [dispatch, cartasSeleccionadas]);
 
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <h1>Juego de Memoria</h1>
-
-      <button onClick={() => dispatch(reiniciarJuego())}>Reiniciar</button>
 
       <div className='card'>
         {cartas.map((carta) => (
@@ -50,8 +54,11 @@ function App() {
         ))}
       </div>
 
-      <p>Movimientos: {movimientos}</p>
-    </>
+      <div style={{ display: 'flex', gap: '100px' }}>
+        <h3>Movimientos: {movimientos}</h3>
+        <button onClick={() => dispatch(reiniciarJuego())}>Reiniciar</button>
+      </div>
+    </div>
   );
 }
 
