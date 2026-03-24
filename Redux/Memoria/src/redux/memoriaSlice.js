@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import mariscada from '../img/mariscada.png';
-import montaña_alien from '../img/montaña_alien.png';
-import oso_panda from '../img/oso_panda.png';
-import scary_movie from '../img/scary_movie.png';
-import serpientes_en_el_avion from '../img/serpientes_en_el_avion.png';
-import sharknado from '../img/sharknado.png';
-import tambor_derretido from '../img/tambor_derretido.png';
-import tortuga_ninja from '../img/tortuga_ninja.png';
+import mariscada from '../img/images/mariscada.png';
+import montaña_alien from '../img/images/montaña_alien.png';
+import oso_panda from '../img/images/oso_panda.png';
+import scary_movie from '../img/images/scary_movie.png';
+import serpientes_en_el_avion from '../img/images/serpientes_en_el_avion.png';
+import sharknado from '../img/images/sharknado.png';
+import tambor_derretido from '../img/images/tambor_derretido.png';
+import tortuga_ninja from '../img/images/tortuga_ninja.png';
 
 const memoriaSlice = createSlice({
   name: 'memoria',
