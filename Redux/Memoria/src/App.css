@@ -37,9 +37,9 @@
   align-items: center;
   justify-content: center;
   width: 100px;
-  height: 100px;
+  height: 130px;
   background-color: #5295bb;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }

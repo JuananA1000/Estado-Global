@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCarta, compararCartas, reiniciarJuego } from './redux/memoriaSlice';
 
+import reves from './img/svg/reves.svg';
+
 import './App.css';
 
 function App() {
@@ -39,7 +41,11 @@ function App() {
                 dispatch(selectCarta(carta));
               }
             }}>
-            {carta.girada ? <img src={carta.img} alt={`Carta ${carta.id}`} width={80} /> : <span>??</span>}
+            {carta.girada ? (
+              <img src={carta.img} alt={`Carta ${carta.id}`} width={80} />
+            ) : (
+              <img src={reves} alt='Reves' width={80} style={{ opacity: 0.2 }} />
+            )}
           </div>
         ))}
       </div>
