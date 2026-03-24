@@ -13,9 +13,14 @@ function App() {
   const cartasSeleccionadas = useSelector((state) => state.memoria.cartasSeleccionadas);
   const bloquearTablero = useSelector((state) => state.memoria.bloquearTablero);
 
-
   useEffect(() => {
-    dispatch(compararCartas());
+    if (cartasSeleccionadas.length === 2) {
+      const timeout = setTimeout(() => {
+        dispatch(compararCartas());
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
   }, [dispatch, cartasSeleccionadas]);
 
   return (
@@ -34,14 +39,9 @@ function App() {
                 dispatch(selectCarta(carta));
               }
             }}>
-            {carta.girada  ? (
-              <img src={carta.img} alt={`Carta ${carta.id}`} width={80} />
-            ) : (
-              <span>??</span>
-            )}
+            {carta.girada ? <img src={carta.img} alt={`Carta ${carta.id}`} width={80} /> : <span>??</span>}
           </div>
         ))}
-
       </div>
 
       <p>Movimientos: {movimientos}</p>
