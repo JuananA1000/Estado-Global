@@ -29,6 +29,10 @@ export const memoriaStore = create((set) => ({
       { id: 8, uid: 15, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
       { id: 8, uid: 16, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
     ].sort(() => Math.random() - 0.5),
+
+    cartasSeleccionadas: [],
+    bloquearTablero: false,
+    movimientos: 0,
   },
 
   selectCarta: (carta) =>
