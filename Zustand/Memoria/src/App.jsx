@@ -1,24 +1,28 @@
 import { useState } from 'react';
 
+import { memoriaStore } from './zustand/memoriaStore';
+
 import reves from './img/svg/reves.svg';
 
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { cartas, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
 
   return (
     <>
       <h1>Juego de Memoria</h1>
 
       <div className='card'>
-        <div className='tarjeta'>
-          <img src={reves} alt='Reves' width={80} style={{ opacity: 0.2 }} />
-        </div>
+        {cartas.items.map((carta) => (
+          <div key={carta.uid} className='tarjeta' onClick={() => log('selectCarta() ')}>
+            {<img src={carta.img} alt={carta.valor} width={80} />}
+          </div>
+        ))}
       </div>
 
       <div>
-        <h3></h3>
+        <h3>Movimientos: 00</h3>
         <button>Reiniciar</button>
       </div>
     </>
