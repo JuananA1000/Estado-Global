@@ -37,16 +37,16 @@ export const memoriaStore = create((set) => ({
 
   selectCarta: (carta) =>
     set((estado) => {
-      console.log('Seleccionar Carta');
+      console.log('Seleccionar Carta z');
     }),
 
   compararCartas: () =>
     set((estado) => {
-      console.log('Comparar Cartas');
+      console.log('Comparar Cartas z');
     }),
 
   reiniciarJuego: () =>
     set((estado) => {
-      console.log('Reiniciar Juego');
+      console.log('Reiniciar Juego z');
     }),
 }));
