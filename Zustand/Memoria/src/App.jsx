@@ -19,13 +19,14 @@ function App() {
   //   }
   // }, [cartas.cartasSeleccionadas, compararCartas]);
 
+
   return (
     <>
       <h1>Juego de Memoria</h1>
 
       <div className='card'>
         {cartas.items.map((carta) => (
-          <div key={carta.uid} className='tarjeta' onClick={() => console.log('selectCarta() ')}>
+          <div key={carta.uid} className='tarjeta' onClick={() => selectCarta(carta)}>
             {<img src={carta.img} alt={carta.valor} width={80} />}
           </div>
         ))}
