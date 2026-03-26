@@ -10,4 +10,6 @@ Aquí, el estado del juego sería más complejo, ya que incluiría información 
 
 Aquí un ejemplo del juego que haremos.
 
-[![Ver video](https://img.youtube.com/vi/2Qf-HQ47gi0/0.jpg)](https://www.youtube.com/watch?v=2Qf-HQ47gi0)
+<a href="https://www.youtube.com/watch?v=2Qf-HQ47gi0" target="_blank">
+  <img src="https://img.youtube.com/vi/2Qf-HQ47gi0/0.jpg" alt="Ver video">
+</a>
