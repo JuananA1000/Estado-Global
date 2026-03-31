@@ -10,15 +10,8 @@ function App() {
   const { cartas, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
 
   // useEffect(() => {
-  //   if (cartas.cartasSeleccionadas.length === 2) {
-  //     const timeout = setTimeout(() => {
-  //       compararCartas();
-  //     }, 1000);
-
-  //     return () => clearTimeout(timeout);
-  //   }
+  //   compararCartas();
   // }, [cartas.cartasSeleccionadas, compararCartas]);
-
 
   return (
     <>

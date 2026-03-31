@@ -37,8 +37,19 @@ export const memoriaStore = create((set) => ({
 
   selectCarta: (carta) =>
     set((estado) => {
-      console.log('Carta seleccionada:', carta);
-      return estado;
+      const { cartas } = estado;
+
+      if (cartas.cartasSeleccionadas.length < 2) {
+        cartas.cartasSeleccionadas.push(carta);
+      }
+
+      if (cartas.cartasSeleccionadas.length === 2) {
+        cartas.bloquearTablero = true;
+        cartas.movimientos += 1;
+      }
+
+      console.log('Carta seleccionada:', carta.valor);
+      return { ...estado };
     }),
 
   compararCartas: () =>
@@ -48,6 +59,11 @@ export const memoriaStore = create((set) => ({
 
   reiniciarJuego: () =>
     set((estado) => {
+      cartasSeleccionadas = [];
+      bloquearTablero = false;
+      movimientos = 0;
+
       console.log('Reiniciar Juego z');
+      return estado;
     }),
 }));
