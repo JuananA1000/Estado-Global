@@ -9,61 +9,75 @@ import sharknado from '../img/images/sharknado.png';
 import tambor_derretido from '../img/images/tambor_derretido.png';
 import tortuga_ninja from '../img/images/tortuga_ninja.png';
 
-export const memoriaStore = create((set) => ({
-  cartas: {
-    items: [
-      { id: 1, uid: 1, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
-      { id: 1, uid: 2, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
-      { id: 2, uid: 3, valor: 'montaña_alien.png', img: montaña_alien, girada: false, emparejada: false },
-      { id: 2, uid: 4, valor: 'montaña_alien.png', img: montaña_alien, girada: false, emparejada: false },
-      { id: 3, uid: 5, valor: 'oso_panda.png', img: oso_panda, girada: false, emparejada: false },
-      { id: 3, uid: 6, valor: 'oso_panda.png', img: oso_panda, girada: false, emparejada: false },
-      { id: 4, uid: 7, valor: 'scary_movie.png', img: scary_movie, girada: false, emparejada: false },
-      { id: 4, uid: 8, valor: 'scary_movie.png', img: scary_movie, girada: false, emparejada: false },
-      { id: 5, uid: 9, valor: 'serpientes_avion.png', img: serpientes_en_el_avion, girada: false, emparejada: false },
-      { id: 5, uid: 10, valor: 'serpientes_avion.png', img: serpientes_en_el_avion, girada: false, emparejada: false },
-      { id: 6, uid: 11, valor: 'sharknado.png', img: sharknado, girada: false, emparejada: false },
-      { id: 6, uid: 12, valor: 'sharknado.png', img: sharknado, girada: false, emparejada: false },
-      { id: 7, uid: 13, valor: 'tambor_derretido.png', img: tambor_derretido, girada: false, emparejada: false },
-      { id: 7, uid: 14, valor: 'tambor_derretido.png', img: tambor_derretido, girada: false, emparejada: false },
-      { id: 8, uid: 15, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
-      { id: 8, uid: 16, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
-    ].sort(() => Math.random() - 0.5),
+export const memoriaStore = create((set, get) => ({
+  cartas: [
+    { id: 1, uid: 1, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
+    { id: 1, uid: 2, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
+    { id: 2, uid: 3, valor: 'montaña_alien.png', img: montaña_alien, girada: false, emparejada: false },
+    { id: 2, uid: 4, valor: 'montaña_alien.png', img: montaña_alien, girada: false, emparejada: false },
+    { id: 3, uid: 5, valor: 'oso_panda.png', img: oso_panda, girada: false, emparejada: false },
+    { id: 3, uid: 6, valor: 'oso_panda.png', img: oso_panda, girada: false, emparejada: false },
+    { id: 4, uid: 7, valor: 'scary_movie.png', img: scary_movie, girada: false, emparejada: false },
+    { id: 4, uid: 8, valor: 'scary_movie.png', img: scary_movie, girada: false, emparejada: false },
+    { id: 5, uid: 9, valor: 'serpientes_avion.png', img: serpientes_en_el_avion, girada: false, emparejada: false },
+    { id: 5, uid: 10, valor: 'serpientes_avion.png', img: serpientes_en_el_avion, girada: false, emparejada: false },
+    { id: 6, uid: 11, valor: 'sharknado.png', img: sharknado, girada: false, emparejada: false },
+    { id: 6, uid: 12, valor: 'sharknado.png', img: sharknado, girada: false, emparejada: false },
+    { id: 7, uid: 13, valor: 'tambor_derretido.png', img: tambor_derretido, girada: false, emparejada: false },
+    { id: 7, uid: 14, valor: 'tambor_derretido.png', img: tambor_derretido, girada: false, emparejada: false },
+    { id: 8, uid: 15, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
+    { id: 8, uid: 16, valor: 'tortuga_ninja.png', img: tortuga_ninja, girada: false, emparejada: false },
+  ].sort(() => Math.random() - 0.5),
 
-    cartasSeleccionadas: [],
-    bloquearTablero: false,
-    movimientos: 0,
+  cartasSeleccionadas: [],
+  bloquearTablero: false,
+  movimientos: 0,
+
+ 
+  selectCarta: (carta) => {
+    const { cartasSeleccionadas, bloquearTablero, movimientos } = get();
+
+    if (bloquearTablero) return;
+
+    console.log('Carta seleccionada:', carta.valor);
+
+    const nuevasSeleccionadas = [...cartasSeleccionadas, carta];
+
+    set({
+      cartasSeleccionadas: nuevasSeleccionadas,
+      bloquearTablero: nuevasSeleccionadas.length === 2,
+      movimientos:
+        nuevasSeleccionadas.length === 2
+          ? movimientos + 1
+          : movimientos,
+    });
   },
 
-  selectCarta: (carta) =>
-    set((estado) => {
-      const { cartas } = estado;
+  compararCartas: () => {
+    const { cartasSeleccionadas } = get();
 
-      if (cartas.cartasSeleccionadas.length < 2) {
-        cartas.cartasSeleccionadas.push(carta);
-      }
+    if (cartasSeleccionadas.length !== 2) return;
 
-      if (cartas.cartasSeleccionadas.length === 2) {
-        cartas.bloquearTablero = true;
-        cartas.movimientos += 1;
-      }
+    const [c1, c2] = cartasSeleccionadas;
 
-      console.log('Carta seleccionada:', carta.valor);
-      return { ...estado };
-    }),
+    console.log('Comparando:', c1.valor, 'vs', c2.valor);
 
-  compararCartas: () =>
-    set((estado) => {
-      console.log('Comparar Cartas z');
-    }),
+    if (c1.valor === c2.valor) {
+      console.log('✅ Cartas emparejadas:', c1.valor, c2.valor);
+    }
 
-  reiniciarJuego: () =>
-    set((estado) => {
-      cartasSeleccionadas = [];
-      bloquearTablero = false;
-      movimientos = 0;
+    set({
+      cartasSeleccionadas: [],
+      bloquearTablero: false,
+    });
+  },
 
-      console.log('Reiniciar Juego z');
-      return estado;
-    }),
+  reiniciarJuego: () => {
+    set((estado) => ({
+      cartas: estado.cartas.sort(() => Math.random() - 0.5),
+      cartasSeleccionadas: [],
+      bloquearTablero: false,
+      movimientos: 0,
+    }));
+  },
 }));

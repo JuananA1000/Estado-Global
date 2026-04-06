@@ -9,16 +9,16 @@ import './App.css';
 function App() {
   const { cartas, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
 
-  // useEffect(() => {
-  //   compararCartas();
-  // }, [cartas.cartasSeleccionadas, compararCartas]);
+  useEffect(() => {
+    compararCartas();
+  }, [cartas]);
 
   return (
     <>
       <h1>Juego de Memoria</h1>
 
       <div className='card'>
-        {cartas.items.map((carta) => (
+        {cartas.map((carta) => (
           <div key={carta.uid} className='tarjeta' onClick={() => selectCarta(carta)}>
             {<img src={carta.img} alt={carta.valor} width={80} />}
           </div>
