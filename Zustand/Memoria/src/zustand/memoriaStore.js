@@ -34,22 +34,31 @@ export const memoriaStore = create((set, get) => ({
   movimientos: 0,
 
   selectCarta: (carta) => {
-    const { bloquearTablero, cartasSeleccionadas } = get(); // get se llama para no tener que invocarlo todo el tiempo al utillizar estas variables
+    const { bloquearTablero, cartasSeleccionadas, movimientos } = get();
 
     if (bloquearTablero) return;
     if (carta.girada || carta.emparejada) return;
     if (cartasSeleccionadas.some((c) => c.uid === carta.uid)) return;
 
-    set((estado) => ({
-      cartasSeleccionadas: [...estado.cartasSeleccionadas, carta],
-    }));
+    const nuevasSeleccionadas = [...cartasSeleccionadas, carta];
 
-    console.log('Carta: ', carta.valor);
+    set({ cartasSeleccionadas: nuevasSeleccionadas });
+
+    if (nuevasSeleccionadas.length === 2) {
+      set({
+        bloquearTablero: true,
+        movimientos: movimientos + 1,
+      });
+
+      console.log('Tablero bloqueado y movimiento sumado');
+    }
+
+    console.log('Carta seleccionada: ', carta.valor);
   },
 
   compararCartas: () => {
     console.log('Comparar zustand');
-    
+
     setTimeout(() => {
       set({ cartasSeleccionadas: [] });
     }, 1000);

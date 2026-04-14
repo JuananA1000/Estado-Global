@@ -28,7 +28,7 @@ function App() {
       </div>
 
       <div>
-        <h3>Movimientos: 00</h3>
+        <h3>Movimientos: 00 {movimientos}</h3>
         <button>Reiniciar</button>
       </div>
     </>
