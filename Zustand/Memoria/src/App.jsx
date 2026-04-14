@@ -7,11 +7,13 @@ import reves from './img/svg/reves.svg';
 import './App.css';
 
 function App() {
-  const { cartas, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
+  const { cartas, cartasSeleccionadas, movimientos, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
 
   useEffect(() => {
-    compararCartas();
-  }, [cartas]);
+    if (cartasSeleccionadas.length === 2) {
+      compararCartas();
+    }
+  }, [cartasSeleccionadas, compararCartas]);
 
   return (
     <>
