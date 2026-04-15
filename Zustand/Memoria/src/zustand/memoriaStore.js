@@ -9,7 +9,7 @@ import sharknado from '../img/images/sharknado.png';
 import tambor_derretido from '../img/images/tambor_derretido.png';
 import tortuga_ninja from '../img/images/tortuga_ninja.png';
 
-export const memoriaStore = create((set, get) => ({
+export const memoriaStore = create((set) => ({
   cartas: [
     { id: 1, uid: 1, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
     { id: 1, uid: 2, valor: 'mariscada.png', img: mariscada, girada: false, emparejada: false },
@@ -34,34 +34,17 @@ export const memoriaStore = create((set, get) => ({
   movimientos: 0,
 
   selectCarta: (carta) => {
-    const { bloquearTablero, cartasSeleccionadas, movimientos } = get();
+    set((estado) => {
+      console.log('Seleccionar carta: ', carta.valor);
 
-    if (bloquearTablero) return;
-    if (carta.girada || carta.emparejada) return;
-    if (cartasSeleccionadas.some((c) => c.uid === carta.uid)) return;
-
-    const nuevasSeleccionadas = [...cartasSeleccionadas, carta];
-
-    set({ cartasSeleccionadas: nuevasSeleccionadas });
-
-    if (nuevasSeleccionadas.length === 2) {
-      set({
-        bloquearTablero: true,
-        movimientos: movimientos + 1,
-      });
-
-      console.log('Tablero bloqueado y movimiento sumado');
-    }
-
-    console.log('Carta seleccionada: ', carta.valor);
+      return estado
+    });
   },
 
   compararCartas: () => {
-    console.log('Comparar zustand');
-
-    setTimeout(() => {
-      set({ cartasSeleccionadas: [] });
-    }, 1000);
+    set((estado) => {
+      console.log('Comparar cartas', estado.cartasSeleccionadas);
+    });
   },
 
   reiniciarJuego: () => {

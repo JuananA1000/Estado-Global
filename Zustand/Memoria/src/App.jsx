@@ -7,13 +7,14 @@ import reves from './img/svg/reves.svg';
 import './App.css';
 
 function App() {
-  const { cartas, cartasSeleccionadas, movimientos, selectCarta, compararCartas, reiniciarJuego } = memoriaStore();
-
-  useEffect(() => {
-    if (cartasSeleccionadas.length === 2) {
-      compararCartas();
-    }
-  }, [cartasSeleccionadas, compararCartas]);
+  const { cartas, cartasSeleccionadas, movimientos, selectCarta, compararCartas, reiniciarJuego } = memoriaStore(
+    (state) => state,
+  );
+  // useEffect(() => {
+  //   if (cartasSeleccionadas.length === 2) {
+  //     compararCartas();
+  //   }
+  // }, [cartasSeleccionadas, compararCartas]);
 
   return (
     <>
