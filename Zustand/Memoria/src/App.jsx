@@ -23,7 +23,11 @@ function App() {
       <div className='card'>
         {cartas.map((carta) => (
           <div key={carta.uid} className='tarjeta' onClick={() => selectCarta(carta)}>
-            {<img src={carta.img} alt={carta.valor} width={80} />}
+            {carta.girada ? (
+              <img src={carta.img} alt={carta.valor} width={80} />
+            ) : (
+              <img src={reves} alt='Reves' width={80} style={{ opacity: 0.2 }} />
+            )}
           </div>
         ))}
       </div>

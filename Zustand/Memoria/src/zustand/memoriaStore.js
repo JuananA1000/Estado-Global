@@ -35,9 +35,26 @@ export const memoriaStore = create((set) => ({
 
   selectCarta: (carta) => {
     set((estado) => {
+      if (estado.bloquearTablero) return estado;
+
+      const cartaIndex = estado.cartas.findIndex((c) => c.uid === carta.uid);
+      if (cartaIndex === -1) return estado;
+
+      const cartaSeleccionada = estado.cartas[cartaIndex];
+
+      if (cartaSeleccionada.girada || cartaSeleccionada.emparejada) return estado;
+
+      cartaSeleccionada.girada = true;
+      estado.cartasSeleccionadas.push(cartaSeleccionada);
+
+      if (estado.cartasSeleccionadas.length === 2) {
+        estado.bloquearTablero = true;
+        estado.movimientos += 1;
+      }
+
       console.log('Seleccionar carta: ', carta.valor);
 
-      return estado
+      return { ...estado };
     });
   },
 
