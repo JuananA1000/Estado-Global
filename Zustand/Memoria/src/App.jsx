@@ -10,11 +10,12 @@ function App() {
   const { cartas, cartasSeleccionadas, movimientos, selectCarta, compararCartas, reiniciarJuego } = memoriaStore(
     (state) => state,
   );
-  // useEffect(() => {
-  //   if (cartasSeleccionadas.length === 2) {
-  //     compararCartas();
-  //   }
-  // }, [cartasSeleccionadas, compararCartas]);
+
+  useEffect(() => {
+    if (cartasSeleccionadas.length === 2) {
+      compararCartas();
+    }
+  }, [cartasSeleccionadas, compararCartas]);
 
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
       </div>
 
       <div>
-        <h3>Movimientos: 00 {movimientos}</h3>
+        <h3>Movimientos: {movimientos}</h3>
         <button>Reiniciar</button>
       </div>
     </>

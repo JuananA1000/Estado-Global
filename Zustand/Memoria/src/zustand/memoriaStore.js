@@ -52,7 +52,7 @@ export const memoriaStore = create((set) => ({
         estado.movimientos += 1;
       }
 
-      console.log('Seleccionar carta: ', carta.valor);
+      // console.log('Seleccionar carta: ', carta.valor);
 
       return { ...estado };
     });
@@ -61,6 +61,8 @@ export const memoriaStore = create((set) => ({
   compararCartas: () => {
     set((estado) => {
       console.log('Comparar cartas', estado.cartasSeleccionadas);
+
+      return { ...estado };
     });
   },
 
