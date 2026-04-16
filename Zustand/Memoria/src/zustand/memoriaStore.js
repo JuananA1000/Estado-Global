@@ -35,13 +35,11 @@ export const memoriaStore = create((set) => ({
 
   selectCarta: (carta) => {
     set((estado) => {
-      if (estado.bloquearTablero) return estado;
-
       const cartaIndex = estado.cartas.findIndex((c) => c.uid === carta.uid);
-      if (cartaIndex === -1) return estado;
-
       const cartaSeleccionada = estado.cartas[cartaIndex];
-
+   
+      if (estado.bloquearTablero) return estado;
+      if (cartaIndex === -1) return estado;
       if (cartaSeleccionada.girada || cartaSeleccionada.emparejada) return estado;
 
       cartaSeleccionada.girada = true;
@@ -59,10 +57,9 @@ export const memoriaStore = create((set) => ({
   compararCartas: () => {
     set((estado) => {
       const cartas = estado.cartasSeleccionadas;
+      const [cartaA, cartaB] = cartas;
 
       if (cartas.length !== 2) return estado;
-
-      const [cartaA, cartaB] = cartas;
 
       if (cartaA.valor === cartaB.valor) {
         return {

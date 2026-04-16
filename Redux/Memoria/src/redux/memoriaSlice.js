@@ -38,14 +38,12 @@ const memoriaSlice = createSlice({
 
   reducers: {
     selectCarta: (state, action) => {
-      if (state.bloquearTablero) return;
-
       const cartaSeleccionada = action.payload;
       const cartaIndex = state.cartas.findIndex((c) => c.uid === cartaSeleccionada.uid);
-      if (cartaIndex === -1) return;
-
       const carta = state.cartas[cartaIndex];
 
+      if (state.bloquearTablero) return;
+      if (cartaIndex === -1) return;
       if (carta.girada || carta.emparejada) return;
 
       carta.girada = true;
@@ -58,12 +56,11 @@ const memoriaSlice = createSlice({
     },
 
     compararCartas: (state) => {
-      if (state.cartasSeleccionadas.length !== 2) return;
-
       const [cartaA, cartaB] = state.cartasSeleccionadas;
-
       const idxA = state.cartas.findIndex((c) => c.uid === cartaA.uid);
       const idxB = state.cartas.findIndex((c) => c.uid === cartaB.uid);
+
+      if (state.cartasSeleccionadas.length !== 2) return;
 
       if (cartaA.valor === cartaB.valor) {
         if (idxA >= 0) state.cartas[idxA].emparejada = true;
