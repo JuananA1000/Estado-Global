@@ -62,30 +62,43 @@ export const memoriaStore = create((set) => ({
     set((estado) => {
       const cartas = estado.cartasSeleccionadas;
       console.log('Comparar cartas desde memoriaStore:', cartas);
-      if (cartas.length === 2) {
-        console.log('Carta 1:', cartas[0]);
-        console.log('Carta 2:', cartas[1]);
+      if (cartas.length !== 2) return estado;
 
-        if (cartas[0].valor === cartas[1].valor) {
-          console.log('¡Emparejadas!');
-          estado.cartas = estado.cartas.map((c) => {
-            if (c.uid === cartas[0].uid || c.uid === cartas[1].uid) {
+      console.log('Carta 1:', cartas[0]);
+      console.log('Carta 2:', cartas[1]);
+
+      const [cartaA, cartaB] = cartas;
+      if (cartaA.valor === cartaB.valor) {
+        console.log('¡Emparejadas!');
+        return {
+          ...estado,
+          cartas: estado.cartas.map((c) => {
+            if (c.uid === cartaA.uid || c.uid === cartaB.uid) {
               return { ...c, emparejada: true };
             }
             return c;
-          });
-        } else {
-          console.log('¡No emparejadas!');
-          estado.cartas = estado.cartas.map((c) => {
-            if (c.uid === cartas[0].uid || c.uid === cartas[1].uid) {
+          }),
+          cartasSeleccionadas: [],
+          bloquearTablero: false,
+        };
+      }
+
+      console.log('¡No emparejadas!');
+      setTimeout(() => {
+        set((estadoActual) => ({
+          ...estadoActual,
+          cartas: estadoActual.cartas.map((c) => {
+            if (c.uid === cartaA.uid || c.uid === cartaB.uid) {
               return { ...c, girada: false };
             }
             return c;
-          });
-        }
-      }
+          }),
+          cartasSeleccionadas: [],
+          bloquearTablero: false,
+        }));
+      }, 500);
 
-      return { ...estado };
+      return { ...estado, bloquearTablero: true };
     });
   },
 
