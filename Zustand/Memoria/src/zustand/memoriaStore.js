@@ -104,7 +104,13 @@ export const memoriaStore = create((set) => ({
 
   reiniciarJuego: () => {
     set((estado) => ({
-      cartas: estado.cartas.sort(() => Math.random() - 0.5),
+      cartas: estado.cartas
+        .map((carta) => ({
+          ...carta,
+          girada: false,
+          emparejada: false,
+        }))
+        .sort(() => Math.random() - 0.5),
       cartasSeleccionadas: [],
       bloquearTablero: false,
       movimientos: 0,

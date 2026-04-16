@@ -36,7 +36,7 @@ function App() {
 
       <div>
         <h3>Movimientos: {movimientos}</h3>
-        <button>Reiniciar</button>
+        <button onClick={reiniciarJuego}>Reiniciar</button>
       </div>
     </>
   );
