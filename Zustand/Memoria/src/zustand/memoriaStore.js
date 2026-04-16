@@ -52,8 +52,6 @@ export const memoriaStore = create((set) => ({
         estado.movimientos += 1;
       }
 
-      // console.log('Seleccionar carta: ', carta.valor);
-
       return { ...estado };
     });
   },
@@ -61,15 +59,12 @@ export const memoriaStore = create((set) => ({
   compararCartas: () => {
     set((estado) => {
       const cartas = estado.cartasSeleccionadas;
-      console.log('Comparar cartas desde memoriaStore:', cartas);
+
       if (cartas.length !== 2) return estado;
 
-      console.log('Carta 1:', cartas[0]);
-      console.log('Carta 2:', cartas[1]);
-
       const [cartaA, cartaB] = cartas;
+
       if (cartaA.valor === cartaB.valor) {
-        console.log('¡Emparejadas!');
         return {
           ...estado,
           cartas: estado.cartas.map((c) => {
@@ -83,7 +78,6 @@ export const memoriaStore = create((set) => ({
         };
       }
 
-      console.log('¡No emparejadas!');
       setTimeout(() => {
         set((estadoActual) => ({
           ...estadoActual,
