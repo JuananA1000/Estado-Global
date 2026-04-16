@@ -13,9 +13,10 @@ function App() {
 
   useEffect(() => {
     if (cartasSeleccionadas.length === 2) {
+      console.log('Cartas a comparar desde App:', cartasSeleccionadas);
       compararCartas();
     }
-  }, [cartasSeleccionadas, compararCartas]);
+  }, [cartasSeleccionadas.length, compararCartas]);
 
   return (
     <>
